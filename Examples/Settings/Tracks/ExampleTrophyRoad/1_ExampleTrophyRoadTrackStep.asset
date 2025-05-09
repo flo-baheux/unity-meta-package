@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d94ad660aef08a48acadacf30edfbda, type: 3}
+  m_Name: 1_ExampleTrophyRoadTrackStep
+  m_EditorClassIdentifier: 
+  displayName: 
+  progressPointsUpperBound: 0
+  milestones:
+  - name: 20
+    _ID: 6b06a792-2b7b-4e00-8aba-aa1668aaab1e
+    pointsRequired: 20
+    rewards:
+    - quantity: 10
+      rewardKind: 4
+      track: 0
+      chestKind: 0
+      upgradable: {fileID: 0}
+      currencyKind: 0
+  - name: 40
+    _ID: c19ff32d-9a25-4275-8871-639fc2248a89
+    pointsRequired: 40
+    rewards:
+    - quantity: 10
+      rewardKind: 4
+      track: 0
+      chestKind: 0
+      upgradable: {fileID: 0}
+      currencyKind: 0
+  - name: 60
+    _ID: 8b7045fc-c06e-49a6-a0b5-c6c730b84b9e
+    pointsRequired: 60
+    rewards:
+    - quantity: 10
+      rewardKind: 4
+      track: 0
+      chestKind: 0
+      upgradable: {fileID: 0}
+      currencyKind: 0
+  triggers: []
+  _milestonePreviousCount: 3
