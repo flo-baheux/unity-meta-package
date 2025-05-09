@@ -76,12 +76,12 @@ namespace MetaPackage
 
     // Rewards
 
-    public List<RewardBundle> GetAllAvailableRewards()
+    public List<RewardBundle> GetAllAvailableMilestoneBundles()
     {
-      List<RewardBundle> allRewards = new();
-      allRewards.AddRange(milestoneRewardBundles);
-      allRewards.AddRange(triggerRewardBundles);
-      return allRewards.FindAll(r => r.state == RewardBundleStateEnum.Available);
+      List<RewardBundle> allBundles = new();
+      allBundles.AddRange(milestoneRewardBundles);
+      allBundles.AddRange(triggerRewardBundles);
+      return allBundles.FindAll(r => r.state == RewardBundleStateEnum.Available);
     }
 
     public List<MilestoneBundle> GetAllMilestoneBundles() => new(milestoneRewardBundles);
@@ -107,11 +107,12 @@ namespace MetaPackage
       return triggeredBundleSettings.Value.rewards;
     }
 
-    public RewardSettings GetSpecificRewardForEvent(TriggerEventKind triggerEvent, Predicate<RewardSettings> rewardPredicate) {
+    public RewardSettings GetSpecificRewardForEvent(TriggerEventKind triggerEvent, Predicate<RewardSettings> rewardPredicate)
+    {
       var eventRewards = GetRewardsForEvent(triggerEvent);
       if (eventRewards == null)
         return null;
-      
+
       return eventRewards.Find(rewardPredicate);
     }
 

@@ -31,9 +31,9 @@ namespace MetaPackage
     public int CurrentStepLowerBound { get; }
     public int CurrentStepUpperBound { get; }
 
-    public void AdjustProgressPointsBy(int increaseBy, bool force = false);
-    public void AdjustProgressPointsBy(int increaseBy);
-    public void AdjustRewardPointsBy(int increaseBy);
+    public void AdjustProgressPointsBy(int adjustBy, bool force = false);
+    public void AdjustProgressPointsBy(int adjustBy);
+    public void AdjustRewardPointsBy(int adjustBy);
 
     public Sprite ProgressPointsIcon { get; }
     public string ProgressPointsDisplayNameSingular { get; }
@@ -43,7 +43,7 @@ namespace MetaPackage
     public string RewardPointsDisplayNameSingular { get; }
     public string RewardPointsDisplayNamePlural { get; }
 
-    public List<RewardBundle> GetAllAvailableBundles();
+    public List<RewardBundle> GetAllAvailableMilestoneBundles();
     public List<MilestoneBundle> GetAllMilestoneBundles();
     public MilestoneBundle GetFirstMilestoneBundleWithStatus(RewardBundleStateEnum status);
     public MilestoneBundle GetLastMilestoneBundleWithStatus(RewardBundleStateEnum status);
@@ -249,24 +249,24 @@ namespace MetaPackage
 
     // Rewards
 
-    public List<RewardBundle> GetAllAvailableBundles()
+    public List<RewardBundle> GetAllAvailableMilestoneBundles()
     {
-      List<RewardBundle> allRewards = new();
+      List<RewardBundle> allBundles = new();
 
       foreach (var step in Steps)
-        allRewards.AddRange(step.GetAllAvailableRewards());
+        allBundles.AddRange(step.GetAllAvailableMilestoneBundles());
 
-      return allRewards;
+      return allBundles;
     }
 
     public List<MilestoneBundle> GetAllMilestoneBundles()
     {
-      List<MilestoneBundle> allRewards = new();
+      List<MilestoneBundle> allBundles = new();
 
       foreach (var step in Steps)
-        allRewards.AddRange(step.GetAllMilestoneBundles());
+        allBundles.AddRange(step.GetAllMilestoneBundles());
 
-      return allRewards.OrderBy(x => x.settings.pointsRequired).ToList();
+      return allBundles.OrderBy(x => x.settings.pointsRequired).ToList();
     }
 
     public MilestoneBundle GetLowerboundMilestoneBundle()

@@ -7,6 +7,5 @@ namespace MetaPackage
   {
     public override IBaseTrack InstantiateTrack() => new ExampleTrophyRoadTrack(this);
     public override TrackKind TrackKind => TrackKind.ExampleTrophyRoadTrack;
-
   }
 }

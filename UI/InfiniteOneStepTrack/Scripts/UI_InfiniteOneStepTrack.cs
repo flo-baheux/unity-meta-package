@@ -77,18 +77,6 @@ public class UI_InfiniteOneStepTrack : MonoBehaviour
     ScrollTo(target);
   }
 
-  public void ScrollToFirstPlayerReward()
-  {
-    var firstPlayerReward = milestoneBundles.First(x => x.rewards[0].settings.rewardKind == RewardKind.UpgradableUnlock);
-    ScrollTo(uiRewardByRewardBundle[firstPlayerReward].GetComponent<RectTransform>());
-  }
-
-  public RectTransform GetFirstPlayerRewardButtonTransform()
-  {
-    var firstPlayerReward = milestoneBundles.First(x => x.rewards[0].settings.rewardKind == RewardKind.UpgradableUnlock);
-    return uiRewardByRewardBundle[firstPlayerReward].GetButtonTransform();
-  }
-
   public float GetYPosition(int points)
   {
     MilestoneBundle lowerReward = track.GetLowerboundMilestoneBundle();

@@ -3,6 +3,9 @@ A packaged set of configurable system features for meta progression. Includes cu
 
 by Florian "Laywelin" Baheux: http://www.laywelin.com
 
+Note: The only dependency in this package is (DOTween)[https://dotween.demigiant.com/] and it's optional. 
+You can remove the UI folder if you don't need it, adapt it to remove its usage, or download the free version.
+
 # Setup info
 
 ## How to add package in project
@@ -99,8 +102,86 @@ ChestSettings chestSettings = MetaManager.Instance.GetChestSettings(ChestKind.No
 
 ## Tracks / Steps
 
-WIP
+For simplicity's sake, let's say you want to create a `CustomTrack` track.
+To define a new track and associated steps, you need to:
+
+1. Add an entry in the `TrackKind` enum inside `MetaPackage/Scripts/Tracks/TrackKind.cs`
+2. Copy paste the content of the `MetaPackage/Examples/Scripts/Upgradables/ExampleSkills` anywhere in your project
+3. Edit the newly created files by replacing `ExampleLeague` everywhere with what suits you
+
+example for ExampleLeagueTrack:
+```csharp
+// FROM
+  public sealed class ExampleLeagueTrack : BaseTrack<ExampleLeagueTrackSettings, ExampleLeagueTrackStep, ExampleLeagueTrackStepSettings>
+  {
+    public ExampleLeagueTrack(ExampleLeagueTrackSettings settings) : base(settings)
+    { }
+
+    public static ExampleLeagueTrack GetLeagueTrack() => MetaManager.Instance.GetTrack<ExampleLeagueTrack>(TrackKind.ExampleLeagueTrack);
+  }
+
+// TO
+  public sealed class CustomTrack : BaseTrack<CustomTrackSettings, CustomTrackStep, CustomTrackStepSettings>
+  {
+    public CustomTrack(CustomTrackSettings settings) : base(settings) { }
+    public static CustomTrack GetLeagueTrack() => MetaManager.Instance.GetTrack<CustomTrack>(TrackKind.CustomTrack);
+  }
+```
+
+4. Create a new TrackSettings SO (right click in Project - `Create/MetaPackage/Tracks/CustomTrackSettings`)
+5. Create a new TrackStepSettings SO (right click in Project - `Create/MetaPackage/Tracks/Steps/CustomTrackStepSettings`)
+6. Inside the created TrackSettings SO, add a step and link the TrackStepSettings SO
+7. Add the created TrackSettings SO inside the list in `MetaPackage/Settings/TracksSettings`
+
+The track is now available from anywhere in the project.
+
+```csharp
+Track track = MetaManager.Instance.GetTrack<CustomTrack>(TrackKind.CustomTrack);
+```
+
+All default capabilities [can be found here](./Scripts/Tracks/BaseTrack.cs)
 
 ## Upgradables
 
-WIP
+For simplicity's sake, let's say you want to create an `UpgradableWeapon` weapon.
+To define a new upgradable kind and be able to define a list of upgradables, you need to:
+
+1. Add an entry in the `UpgradableKind` enum inside `MetaPackage/Scripts/Upgradables/UpgradableKind.cs`
+2. Copy paste the content of the `MetaPackage/Examples/Scripts/Upgradables/ExampleSkills` anywhere in your project
+3. Edit the newly created files by replacing `ExampleUpgradableSkill` everywhere with what suits you
+
+example for ExampleUpgradableSkill:
+```csharp
+// FROM
+  public sealed class ExampleUpgradableSkill : Upgradable<ExampleUpgradableSkillKind, ExampleUpgradableSkillSettings, ExampleUpgradableSkillLevelSettings>
+  {
+    public ExampleUpgradableSkill(ExampleUpgradableSkillSettings settings) : base(settings)
+    {
+    }
+  }
+
+// TO
+  public sealed class UpgradableWeapon : Upgradable<UpgradableWeaponKind, UpgradableWeaponSettings, UpgradableWeaponLevelSettings>
+  {
+    public UpgradableWeapon(ExampleUpgradableSkillSettings settings) : base(settings)
+    {
+    }
+  }
+```
+
+4. Create a new UpgradableCategorySettings SO (right click in Project - `Create/MetaPackage/Upgradables/UpgradableWeaponCategorySettings`)
+5. Create a new UpgradableSettings SO (right click in Project - `Create/MetaPackage/Tracks/Steps/UpgradableWeaponSettings`)
+6. Inside the created UpgradableCategorySettings SO, link the new UpgradableSettings SO
+7. Inside the created UpgradableSettings SO, link the new UpgradableCategorySettings SO (It's a two way relationship!)
+8. Add the created UpgradableCategorySettings SO inside the list in `MetaPackage/Settings/UpgradableSettings`
+
+The upgradable is now available from anywhere in the project.
+
+```csharp
+  UpgradableFireSword upgradableFireSword = MetaManager.Instance.GetUpgradable<UpgradableFireSword>(
+    UpgradableKind.UpgradableWeapon,
+    UpgradableWeaponKind.FireSword
+  );
+```
+
+All default capabilities [can be found here](./Scripts/Upgradables/UpgradableEntity.cs)

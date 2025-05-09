@@ -2,7 +2,7 @@
 
 namespace MetaPackage
 {
-  [CreateAssetMenu(menuName = "MetaPackage/TrackSteps/ExampleTrophyRoadTrackStep", fileName = "ExampleTrophyRoadTrackStepSettings")]
+  [CreateAssetMenu(menuName = "MetaPackage/Tracks/Steps/ExampleTrophyRoadTrackStep", fileName = "ExampleTrophyRoadTrackStepSettings")]
   public class ExampleTrophyRoadTrackStepSettings : BaseTrackStepSettings
   {
     public override IBaseTrackStep GetTrackStep(IBaseTrack parentTrack, int indexInTrack)

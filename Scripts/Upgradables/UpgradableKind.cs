@@ -6,6 +6,6 @@ namespace MetaPackage
   [Serializable]
   public enum UpgradableKind
   {
-    ExampleSkills = 0
+    ExampleUpgradableSkill = 0
   }
 }
