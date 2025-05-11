@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46bee6219bcde5b419b6a02873da23b3, type: 3}
+  m_Name: Chests
+  m_EditorClassIdentifier: 
+  upgradeChestSettingsList:
+  - {fileID: 11400000, guid: 4c247737ecd0a3548b9d27190ee5d314, type: 2}

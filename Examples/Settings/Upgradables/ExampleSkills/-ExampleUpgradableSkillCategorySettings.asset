@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ac823a935a61d4d8adf5127612fe5d, type: 3}
+  m_Name: -ExampleUpgradableSkillCategorySettings
+  m_EditorClassIdentifier: 
+  rarityLevelsSettings:
+  - rarityKind: 0
+    levelsSettings:
+    - experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+    - experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+  - rarityKind: 1
+    levelsSettings:
+    - experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+    - experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+  - rarityKind: 2
+    levelsSettings:
+    - experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+    - experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+  upgradableSettings:
+  - {fileID: 11400000, guid: 2f70bd0d14306a54b8e0efe877044e12, type: 2}
+  - {fileID: 11400000, guid: 34418059b47e7474ba56b89c43e3faa8, type: 2}
+  - {fileID: 11400000, guid: bba5389fe90006d4992b18a245cfea7d, type: 2}

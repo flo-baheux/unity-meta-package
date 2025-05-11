@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d778e9734c205b947a77dad557706f96, type: 3}
+  m_Name: Tracks
+  m_EditorClassIdentifier: 
+  trackSettingsList:
+  - {fileID: 11400000, guid: e46a926f6e0320c4d9dbb8253fe9631d, type: 2}
+  - {fileID: 11400000, guid: 367ff4371cb3b4b4ab01780f6d22ac45, type: 2}

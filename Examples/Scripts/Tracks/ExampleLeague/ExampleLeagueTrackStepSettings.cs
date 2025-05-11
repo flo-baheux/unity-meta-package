@@ -1,0 +1,11 @@
+﻿using UnityEngine;
+
+namespace MetaPackage
+{
+  [CreateAssetMenu(menuName = "MetaPackage/Tracks/Steps/ExampleLeagueTrackStep", fileName = "ExampleLeagueTrackStepSettings")]
+  public class ExampleLeagueTrackStepSettings : BaseTrackStepSettings
+  {
+    public override IBaseTrackStep GetTrackStep(IBaseTrack parentTrack, int indexInTrack)
+      => new ExampleLeagueTrackStep(this, (ExampleLeagueTrack)parentTrack, indexInTrack);
+  }
+}
