@@ -6,18 +6,14 @@ using UnityEngine;
 
 namespace MetaPackage
 {
-  public class MetaManagerTracksComponent : MonoBehaviour
+  public class MetaManagerTracksComponent : MetaManagerComponent
   {
     [SerializeField] private TracksSettings tracksSettings;
     private ReadOnlyDictionary<TrackKind, IBaseTrack> metaTrackByKeyName;
     public List<TrackKind> ConfiguredTrackKinds => metaTrackByKeyName.Keys.ToList();
 
-    private bool hasBeenInitialized = false;
-    public void Initialize()
+    protected override void Setup()
     {
-      if (hasBeenInitialized)
-        return;
-
       Dictionary<TrackKind, IBaseTrack> dict = new();
 
       if (!tracksSettings || tracksSettings.trackSettingsList.Count == 0)
@@ -42,8 +38,6 @@ namespace MetaPackage
         track.OnRewardBundleClaimed += param => OnRewardBundleClaimed?.Invoke(instanciatedTrackSettings.TrackKind, param);
       }
       metaTrackByKeyName = new(dict);
-
-      hasBeenInitialized = true;
     }
 
     public Action<TrackKind, (int previousValue, int newValue)> OnProgressPointsChanged;

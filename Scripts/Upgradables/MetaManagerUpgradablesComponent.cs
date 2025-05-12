@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MetaPackage
 {
-  public class MetaManagerUpgradablesComponent : MonoBehaviour
+  public class MetaManagerUpgradablesComponent : MetaManagerComponent
   {
     [SerializeField] private UpgradableCategoriesSettings upgradableCategoriesSettings;
     private ReadOnlyDictionary<(int, int), IBaseUpgradable> upgradableByKind;
@@ -17,12 +17,8 @@ namespace MetaPackage
     public Action<UpgradableKind, Enum> OnLevelChanged { get; set; }
     public Action<UpgradableKind, Enum> OnUpgradeAvailable { get; set; }
 
-    private bool hasBeenInitialized = false;
-    public void Initialize()
+    protected override void Setup()
     {
-      if (hasBeenInitialized)
-        return;
-
       Dictionary<(int, int), IBaseUpgradable> upgradableDict = new();
       Dictionary<UpgradableKind, BaseUpgradableCategorySettings> upgradableCategoryDict = new();
 
@@ -51,8 +47,6 @@ namespace MetaPackage
 
       categorySettingsByKind = new(upgradableCategoryDict);
       upgradableByKind = new(upgradableDict);
-
-      hasBeenInitialized = true;
     }
 
     public T GetUpgradable<T>(UpgradableKind upgradableKind, Enum entityKind)

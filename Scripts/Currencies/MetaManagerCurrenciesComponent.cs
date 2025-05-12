@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MetaPackage
 {
-  public class MetaManagerCurrenciesComponent : MonoBehaviour
+  public class MetaManagerCurrenciesComponent : MetaManagerComponent
   {
     [SerializeField] private CurrenciesSettings currenciesSettings;
     private ReadOnlyDictionary<CurrencyKind, Currency> currenciesByKind;
@@ -14,21 +14,19 @@ namespace MetaPackage
     public Action<CurrencyKind, (int oldValue, int newValue)> OnCurrencyQuantityChanged;
     public Action<CurrencyKind> OnCurrencyUnlocked;
 
-    private bool hasBeenInitialized = false;
-    public void Initialize()
+    protected override void Setup()
     {
-      if (hasBeenInitialized)
-        return;
-
       Dictionary<CurrencyKind, Currency> dict = new();
 
-      if (currenciesSettings.currencySettingsList.Count == 0) {
+      if (currenciesSettings.currencySettingsList.Count == 0)
+      {
         Debug.LogWarning($"[Meta Manager] - No currency settings are set ({name}).");
         currenciesByKind = new(dict);
         return;
       }
 
-      foreach (var currencySettings in currenciesSettings.currencySettingsList) {
+      foreach (var currencySettings in currenciesSettings.currencySettingsList)
+      {
         var instanciatedCurrencySettings = ScriptableObject.Instantiate(currencySettings);
         var currency = instanciatedCurrencySettings.InstantiateCurrency();
         var currencyKind = instanciatedCurrencySettings.currencyKind;
@@ -39,11 +37,9 @@ namespace MetaPackage
         currency.OnUnlocked += () => OnCurrencyUnlocked?.Invoke(currencyKind);
       }
       currenciesByKind = new(dict);
-
-      hasBeenInitialized = true;
     }
 
-    public Currency GetCurrency(CurrencyKind kind) 
+    public Currency GetCurrency(CurrencyKind kind)
       => currenciesByKind[kind];
 
     public CurrenciesSaveData GetSaveData() => new()
@@ -51,16 +47,19 @@ namespace MetaPackage
       currenciesSaveData = currenciesByKind.Values.Select(track => track.GetSaveData()).ToList(),
     };
 
-    public void LoadSaveData(CurrenciesSaveData saveData) {
-      foreach (CurrencySaveData currencySaveData in saveData.currenciesSaveData) {
+    public void LoadSaveData(CurrenciesSaveData saveData)
+    {
+      foreach (CurrencySaveData currencySaveData in saveData.currenciesSaveData)
+      {
         if (currenciesByKind.TryGetValue(currencySaveData.currencyKind, out Currency currency))
           currency.LoadSaveData(currencySaveData);
       }
     }
 
-    public void ResetSaveData() {
+    public void ResetSaveData()
+    {
       foreach (Currency currency in currenciesByKind.Values)
-        currency.ResetSaveData();    
+        currency.ResetSaveData();
     }
   }
 }

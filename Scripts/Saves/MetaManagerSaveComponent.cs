@@ -7,22 +7,18 @@ using UnityEngine;
 
 namespace MetaPackage
 {
-  public class MetaManagerSaveComponent : MonoBehaviour
+  public class MetaManagerSaveComponent : MetaManagerComponent
   {
     public bool optimizeSaveFile = false;
     public static string SaveFilePath => $"{Application.persistentDataPath}/meta.data";
-    private bool isInitialized = false;
     private bool isLoadingSave = false;
 
     MetaManagerTracksComponent tracksComponent;
     MetaManagerUpgradablesComponent upgradablesComponent;
     MetaManagerCurrenciesComponent currenciesComponent;
 
-    public void Initialize()
+    protected override void Setup()
     {
-      if (isInitialized)
-        return;
-
       tracksComponent = GetComponent<MetaManagerTracksComponent>();
       upgradablesComponent = GetComponent<MetaManagerUpgradablesComponent>();
       currenciesComponent = GetComponent<MetaManagerCurrenciesComponent>();
@@ -41,8 +37,6 @@ namespace MetaPackage
 
       currenciesComponent.OnCurrencyQuantityChanged += (_, _) => Save();
       currenciesComponent.OnCurrencyUnlocked += (_) => Save();
-
-      isInitialized = true;
     }
 
     public void Save()

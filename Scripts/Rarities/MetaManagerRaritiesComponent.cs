@@ -5,20 +5,13 @@ using UnityEngine;
 
 namespace MetaPackage
 {
-  public class MetaManagerRaritiesComponent : MonoBehaviour
+  public class MetaManagerRaritiesComponent : MetaManagerComponent
   {
     [SerializeField] private RaritiesSettings raritiesSettings;
     public ReadOnlyDictionary<RarityKind, RaritySettings> raritySettingsByKind;
 
-    void Awake() => Initialize();
-    void OnEnable() => Initialize();
-
-    private bool hasBeenInitialized = false;
-    public void Initialize()
+    protected override void Setup()
     {
-      if (hasBeenInitialized)
-        return;
-
       Dictionary<RarityKind, RaritySettings> dict = new();
 
       if (!raritiesSettings || raritiesSettings.raritySettingsList.Count == 0)
@@ -34,8 +27,6 @@ namespace MetaPackage
         dict[raritySettings.kind] = instantiatedRaritySettings;
       }
       raritySettingsByKind = new(dict);
-
-      hasBeenInitialized = true;
     }
   }
 }

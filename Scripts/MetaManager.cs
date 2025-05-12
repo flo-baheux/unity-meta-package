@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace MetaPackage
@@ -13,7 +14,7 @@ namespace MetaPackage
   public class MetaManager : MonoBehaviour
   {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ClearStaticReferences()
+    public static void ClearStaticReferences()
      => instance = null;
 
     private static MetaManager instance;
@@ -213,5 +214,33 @@ namespace MetaPackage
 
     public static void OpenSaveFolder()
       => MetaManagerSaveComponent.OpenSaveFolder();
+
+#if UNITY_EDITOR
+    public void Reset()
+    {
+      isInitialized = false;
+      chestsComponent?.Reset();
+      raritiesComponent?.Reset();
+      tracksComponent?.Reset();
+      upgradablesComponent?.Reset();
+      currenciesComponent?.Reset();
+      saveComponent?.Reset();
+    }
+#endif
   }
+
+#if UNITY_EDITOR
+  [InitializeOnLoad]
+  public static class ManagerEditorReset
+  {
+    static ManagerEditorReset()
+    {
+      EditorApplication.delayCall += () =>
+      {
+        MetaManager.Instance.Reset();
+        MetaManager.ClearStaticReferences();
+      };
+    }
+  }
+#endif
 }

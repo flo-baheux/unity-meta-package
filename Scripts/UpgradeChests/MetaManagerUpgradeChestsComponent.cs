@@ -4,17 +4,13 @@ using UnityEngine;
 
 namespace MetaPackage
 {
-  public class MetaManagerUpgradeChestsComponent : MonoBehaviour
+  public class MetaManagerUpgradeChestsComponent : MetaManagerComponent
   {
     [SerializeField] private UpgradeChestsSettings upgradeChestsSettings;
     public ReadOnlyDictionary<UpgradeChestKind, UpgradeChestSettings> upgradeChestSettingsByKind;
 
-    private bool hasBeenInitialized = false;
-    public void Initialize()
+    protected override void Setup()
     {
-      if (hasBeenInitialized)
-        return;
-
       Dictionary<UpgradeChestKind, UpgradeChestSettings> dict = new();
 
       if (!upgradeChestsSettings || upgradeChestsSettings.upgradeChestSettingsList.Count == 0)
@@ -30,8 +26,6 @@ namespace MetaPackage
         dict[upgradeChestSettings.kind] = instantiatedUpgradeChestSettings;
       }
       upgradeChestSettingsByKind = new(dict);
-
-      hasBeenInitialized = true;
     }
   }
 }
