@@ -12,7 +12,7 @@ namespace MetaPackage
   [Serializable]
   public class CurrencySaveData
   {
-    public CurrencyKind currencyKind;
+    public CurrencyReference currency;
     public bool isUnlocked;
     public int quantity;
   }

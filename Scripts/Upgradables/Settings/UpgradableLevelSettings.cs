@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MetaPackage
 {
@@ -8,5 +9,10 @@ namespace MetaPackage
   {
     public int experienceToNextLevel;
     public List<UpgradableUpgradeCost> costsToUpgrade;
+
+    public virtual bool ValidateReferences()
+    {
+      return costsToUpgrade.All(x => x.ValidateReferences());
+    }
   }
 }

@@ -27,7 +27,7 @@ namespace MetaPackage
       List<UpgradableRewardData> eligiblesRewardData = MetaManager.Instance.GetUpgradableEntitiesEligibleForReward(upgradeChestSettings.upgradableKind);
       var rewardDataByKind = eligiblesRewardData.ToDictionary(e => e.entityKind, e => e);
 
-      var eligiblesRewardDataByRarityLookup = eligiblesRewardData.ToLookup(e => e.rarityKind, e => e);
+      var eligiblesRewardDataByRarityLookup = eligiblesRewardData.ToLookup(e => e.rarity, e => e);
 
       // To apply weights in a way that evenly spread the odds if no actors are available for a given rarity, 
       // we setup a "bag". In it, we add each eligible actorKind n times, where n is rarity weight * 10.
@@ -71,7 +71,7 @@ namespace MetaPackage
           nbRewardsByKind[pickedInBagRewardData.entityKind] = 1;
         }
 
-        rewardCount += Math.Clamp(rarityChestDataByRarity[pickedInBagRewardData.rarityKind].rewardCountValue, 0, upgradeChestSettings.maxRewards - rewardCount);
+        rewardCount += Math.Clamp(rarityChestDataByRarity[pickedInBagRewardData.rarity].rewardCountValue, 0, upgradeChestSettings.maxRewards - rewardCount);
       }
 
       if (failSafeCount == failSafeMax)

@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Fireball
   icon: {fileID: 0}
-  rarityKind: 0
+  rarity:
+    _name: LEGNENDAYRRYYYYYY
+    _ID: d634ebbd-0959-4115-9f0c-49a7adc574b3
   unlockedByDefault: 1
   eligibleForRewards: 1
   entityKind: 0

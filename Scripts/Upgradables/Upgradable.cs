@@ -63,7 +63,7 @@ namespace MetaPackage
       {
         upgradableKind = Settings.UpgradableKind,
         entityKind = Settings.entityKind,
-        rarityKind = Settings.rarityKind
+        rarity = Settings.rarity
       };
 
       if (!IBaseUpgradable.entityKindByUpgradableKind.ContainsKey(Settings.UpgradableKind))
@@ -166,7 +166,7 @@ namespace MetaPackage
       if (IsCurrentLevelLast || ExperienceRelativeToLevel < CurrentLevelSettings.experienceToNextLevel)
         return false;
 
-      if (CurrentLevelSettings.costsToUpgrade.Any(cost => cost.quantity > MetaManager.Instance.GetCurrency(cost.currencyKind).Quantity))
+      if (CurrentLevelSettings.costsToUpgrade.Any(cost => cost.quantity > MetaManager.Instance.GetCurrency(cost.currencyReference).Quantity))
         return false;
 
       return true;
@@ -179,7 +179,7 @@ namespace MetaPackage
 
       var costsToUpgrade = CurrentLevelSettings.costsToUpgrade;
       foreach (var cost in costsToUpgrade)
-        MetaManager.Instance.GetCurrency(cost.currencyKind).AdjustQuantity(-cost.quantity);
+        MetaManager.Instance.GetCurrency(cost.currencyReference).AdjustQuantity(-cost.quantity);
 
       return true;
     }

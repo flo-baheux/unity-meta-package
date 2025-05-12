@@ -19,7 +19,7 @@ namespace MetaPackage
     public InternalUpgradableSettings upgradable;
 
     [ShowIf("rewardKind", RewardKind.Currency)]
-    public CurrencyKind currencyKind;
+    public CurrencyReference currencyReference;
 
     public void Init()
     {

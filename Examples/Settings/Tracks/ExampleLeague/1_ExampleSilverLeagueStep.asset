@@ -21,7 +21,7 @@ MonoBehaviour:
     - quantity: 5
       rewardKind: 0
       track: 0
-      chestKind: 0
+      upgradeChestKind: 0
       upgradable: {fileID: 0}
       currencyKind: 0
   - eventCondition: 1
@@ -29,7 +29,7 @@ MonoBehaviour:
     - quantity: -2
       rewardKind: 0
       track: 0
-      chestKind: 0
+      upgradeChestKind: 0
       upgradable: {fileID: 0}
       currencyKind: 0
   _milestonePreviousCount: 0

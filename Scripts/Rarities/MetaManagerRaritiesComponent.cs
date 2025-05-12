@@ -1,41 +1,34 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using UnityEngine;
 
 namespace MetaPackage
 {
-  public class MetaManagerRaritiesComponent : MonoBehaviour
+  public class MetaManagerRaritiesComponent : MetaManagerComponent
   {
-    [SerializeField] private RaritiesSettings raritiesSettings;
-    public ReadOnlyDictionary<RarityKind, RaritySettings> raritySettingsByKind;
+    [SerializeField] public RarityDatabase rarityDatabase;
+    public ReadOnlyDictionary<RarityReference, RaritySettings> raritySettingsByReference;
 
-    void Awake() => Initialize();
-    void OnEnable() => Initialize();
-
-    private bool hasBeenInitialized = false;
-    public void Initialize()
+    protected override void Setup()
     {
-      if (hasBeenInitialized)
-        return;
+      Dictionary<RarityReference, RaritySettings> dict = new();
 
-      Dictionary<RarityKind, RaritySettings> dict = new();
-
-      if (!raritiesSettings || raritiesSettings.raritySettingsList.Count == 0)
+      if (!rarityDatabase || rarityDatabase.raritySettingsList.Count == 0)
       {
         Debug.LogWarning($"[Meta Manager] - No rarity settings set ({name}).");
-        raritySettingsByKind = new(dict);
+        raritySettingsByReference = new(dict);
         return;
       }
 
-      foreach (var raritySettings in raritiesSettings.raritySettingsList)
+      foreach (var raritySettings in rarityDatabase.raritySettingsList)
       {
-        var instantiatedRaritySettings = ScriptableObject.Instantiate(raritySettings);
-        dict[raritySettings.kind] = instantiatedRaritySettings;
+        RarityReference reference = raritySettings.GenerateReference();
+        dict[reference] = raritySettings;
       }
-      raritySettingsByKind = new(dict);
-
-      hasBeenInitialized = true;
+      raritySettingsByReference = new(dict);
     }
+
+    public RaritySettings GetRaritySettings(RarityReference rarityReference) => raritySettingsByReference.GetValueOrDefault(rarityReference, null);
+    public IReadOnlyList<RaritySettings> GetAllRaritySettings() => rarityDatabase.raritySettingsList;
   }
 }

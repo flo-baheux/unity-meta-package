@@ -6,61 +6,59 @@ using UnityEngine;
 
 namespace MetaPackage
 {
-  public class MetaManagerCurrenciesComponent : MonoBehaviour
+  public class MetaManagerCurrenciesComponent : MetaManagerComponent
   {
-    [SerializeField] private CurrenciesSettings currenciesSettings;
-    private ReadOnlyDictionary<CurrencyKind, Currency> currenciesByKind;
+    [SerializeField] private CurrencyDatabase currencyDatabase;
+    private ReadOnlyDictionary<CurrencyReference, Currency> currencyByReference;
 
-    public Action<CurrencyKind, (int oldValue, int newValue)> OnCurrencyQuantityChanged;
-    public Action<CurrencyKind> OnCurrencyUnlocked;
+    public Action<CurrencyReference, (int oldValue, int newValue)> OnCurrencyQuantityChanged;
+    public Action<CurrencyReference> OnCurrencyUnlocked;
 
-    private bool hasBeenInitialized = false;
-    public void Initialize()
+    protected override void Setup()
     {
-      if (hasBeenInitialized)
-        return;
+      Dictionary<CurrencyReference, Currency> dict = new();
 
-      Dictionary<CurrencyKind, Currency> dict = new();
-
-      if (currenciesSettings.currencySettingsList.Count == 0) {
+      if (currencyDatabase == null || currencyDatabase.currencySettingsList.Count == 0)
+      {
         Debug.LogWarning($"[Meta Manager] - No currency settings are set ({name}).");
-        currenciesByKind = new(dict);
+        currencyByReference = new(dict);
         return;
       }
 
-      foreach (var currencySettings in currenciesSettings.currencySettingsList) {
-        var instanciatedCurrencySettings = ScriptableObject.Instantiate(currencySettings);
-        var currency = instanciatedCurrencySettings.InstantiateCurrency();
-        var currencyKind = instanciatedCurrencySettings.currencyKind;
+      foreach (var currencySettings in currencyDatabase.currencySettingsList)
+      {
+        var currency = currencySettings.InstantiateCurrency();
+        var currencyReference = currencySettings.currencyReference;
 
-        dict[currencyKind] = currency;
+        dict[currencyReference] = currency;
 
-        currency.OnQuantityChanged += (param) => OnCurrencyQuantityChanged?.Invoke(currencyKind, param);
-        currency.OnUnlocked += () => OnCurrencyUnlocked?.Invoke(currencyKind);
+        currency.OnQuantityChanged += (param) => OnCurrencyQuantityChanged?.Invoke(currencyReference, param);
+        currency.OnUnlocked += () => OnCurrencyUnlocked?.Invoke(currencyReference);
       }
-      currenciesByKind = new(dict);
-
-      hasBeenInitialized = true;
+      currencyByReference = new(dict);
     }
 
-    public Currency GetCurrency(CurrencyKind kind) 
-      => currenciesByKind[kind];
+    public Currency GetCurrency(CurrencyReference currencyReference) => currencyByReference.GetValueOrDefault(currencyReference, null);
+    public IReadOnlyList<CurrencySettings> GetAllCurrencySettings() => currencyDatabase.currencySettingsList;
 
     public CurrenciesSaveData GetSaveData() => new()
     {
-      currenciesSaveData = currenciesByKind.Values.Select(track => track.GetSaveData()).ToList(),
+      currenciesSaveData = currencyByReference.Values.Select(track => track.GetSaveData()).ToList(),
     };
 
-    public void LoadSaveData(CurrenciesSaveData saveData) {
-      foreach (CurrencySaveData currencySaveData in saveData.currenciesSaveData) {
-        if (currenciesByKind.TryGetValue(currencySaveData.currencyKind, out Currency currency))
+    public void LoadSaveData(CurrenciesSaveData saveData)
+    {
+      foreach (CurrencySaveData currencySaveData in saveData.currenciesSaveData)
+      {
+        if (currencyByReference.TryGetValue(currencySaveData.currency, out Currency currency))
           currency.LoadSaveData(currencySaveData);
       }
     }
 
-    public void ResetSaveData() {
-      foreach (Currency currency in currenciesByKind.Values)
-        currency.ResetSaveData();    
+    public void ResetSaveData()
+    {
+      foreach (Currency currency in currencyByReference.Values)
+        currency.ResetSaveData();
     }
   }
 }

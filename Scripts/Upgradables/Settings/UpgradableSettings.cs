@@ -10,12 +10,18 @@ namespace MetaPackage
     public abstract Enum EntityKindAsEnum { get; }
     public string displayName;
     public Sprite icon;
-    public RarityKind rarityKind;
+    public RarityReference rarity;
 
     public bool unlockedByDefault = false;
     public bool eligibleForRewards = true;
 
     public abstract IBaseUpgradable InstantiateUpgradable();
+
+    public virtual bool ValidateReferences()
+    {
+      var raritySettings = MetaManager.Instance.GetRaritySettings(rarity);
+      return raritySettings != null;
+    }
   }
 
   public abstract class UpgradableSettings<T_EntityKind, T_LevelSettings> : InternalUpgradableSettings
@@ -35,7 +41,7 @@ namespace MetaPackage
         {
           _levelsSettings = CategorySettings
             .rarityLevelsSettings
-            .Find(x => x.rarityKind == rarityKind)
+            .Find(x => x.rarity == rarity)
             .levelsSettings;
         }
         return _levelsSettings;

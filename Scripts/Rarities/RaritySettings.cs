@@ -1,12 +1,21 @@
-﻿using UnityEngine;
+using UnityEngine;
+using System;
 
 namespace MetaPackage
 {
-  [CreateAssetMenu(menuName = "MetaPackage/Rarity", fileName = "RaritySettings")]
-  public class RaritySettings: ScriptableObject
-  {
-    public RarityKind kind;
-    public string displayName;
-    public Color color;
-  }
+    [Serializable]
+    public class RaritySettings : Referenceable<RarityReference>
+    {
+        public string displayName;
+        public Color color;
+
+        public override RarityReference GenerateReference() => new(ID, displayName);
+
+        public void Refresh()
+        {
+            if (string.IsNullOrEmpty(_ID))
+                ResetID();
+            name = displayName;
+        }
+    }
 }

@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228adcf109c87434792c7027f3f8c6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  raritiesSettings: {fileID: 11400000, guid: 800dbabae610c7849ae27ded61420d2c, type: 2}
+  rarityDatabase: {fileID: 11400000, guid: 5b1525d01a16b1943be2910692ba9c32, type: 2}
 --- !u!114 &8280740251535625419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 930920189fbed9147b2ca3de7509af63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currenciesSettings: {fileID: 11400000, guid: 79a6eb9b9fd323a4b903a731e074f679, type: 2}
+  currencyDatabase: {fileID: 11400000, guid: 79a6eb9b9fd323a4b903a731e074f679, type: 2}
 --- !u!114 &4720625145270015659
 MonoBehaviour:
   m_ObjectHideFlags: 0

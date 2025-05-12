@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Frostball
   icon: {fileID: 0}
-  rarityKind: 1
+  rarity:
+    _name: Rare
+    _ID: e683636c-d68b-44c3-935e-0ba49672b7cc
   unlockedByDefault: 0
   eligibleForRewards: 1
   entityKind: 1

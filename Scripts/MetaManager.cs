@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace MetaPackage
@@ -13,8 +15,8 @@ namespace MetaPackage
   public class MetaManager : MonoBehaviour
   {
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    private static void ClearStaticReferences()
-     => instance = null;
+    public static void ClearStaticRefs()
+    => instance = null;
 
     private static MetaManager instance;
 
@@ -117,7 +119,8 @@ namespace MetaPackage
     ** RARITIES
     */
 
-    public RaritySettings GetRaritySettings(RarityKind kind) => raritiesComponent.raritySettingsByKind[kind];
+    public RaritySettings GetRaritySettings(RarityReference rarityReference) => raritiesComponent.GetRaritySettings(rarityReference);
+    public IReadOnlyList<RaritySettings> GetAllRaritySettings() => raritiesComponent.GetAllRaritySettings();
 
     /*
     ** CHESTS
@@ -191,15 +194,15 @@ namespace MetaPackage
     ** CURRENCIES
     */
 
-    public Action<CurrencyKind, (int oldValue, int newValue)> OnCurrencyQuantityChanged;
-    public Action<CurrencyKind> OnCurrencyUnlocked;
+    public Action<CurrencyReference, (int oldValue, int newValue)> OnCurrencyQuantityChanged;
+    public Action<CurrencyReference> OnCurrencyUnlocked;
 
     /// <summary>
     /// Method to retrieve a defined currency.
     /// </summary>
     /// <returns>A Currency instance.</returns>
-    public Currency GetCurrency(CurrencyKind kind)
-      => currenciesComponent.GetCurrency(kind);
+    public Currency GetCurrency(CurrencyReference currencyReference) => currenciesComponent.GetCurrency(currencyReference);
+    public IReadOnlyList<CurrencySettings> GetAllCurrencySettings() => currenciesComponent.GetAllCurrencySettings();
 
     /* 
     ** GLOBAL
@@ -213,5 +216,33 @@ namespace MetaPackage
 
     public static void OpenSaveFolder()
       => MetaManagerSaveComponent.OpenSaveFolder();
+
+#if UNITY_EDITOR
+    public void Reset()
+    {
+      isInitialized = false;
+      chestsComponent?.Reset();
+      raritiesComponent?.Reset();
+      tracksComponent?.Reset();
+      upgradablesComponent?.Reset();
+      currenciesComponent?.Reset();
+      saveComponent?.Reset();
+    }
+#endif
   }
+
+#if UNITY_EDITOR
+  [InitializeOnLoad]
+  public static class ManagerEditorReset
+  {
+    static ManagerEditorReset()
+    {
+      EditorApplication.delayCall += () =>
+      {
+        MetaManager.Instance.Reset();
+        MetaManager.ClearStaticRefs();
+      };
+    }
+  }
+#endif
 }

@@ -84,7 +84,7 @@ namespace MetaPackageDebug
       var entityNameLabel = BuildLabel($"Entity name: {(string.IsNullOrWhiteSpace(data.settings.displayName) ? "[no display name]" : data.settings.displayName)}", 16);
       upgradableView.Add(entityNameLabel);
 
-      var rarity = MetaManager.Instance.GetRaritySettings(data.settings.rarityKind);
+      var rarity = MetaManager.Instance.GetRaritySettings(data.settings.rarity);
       var entityRarityLabel = BuildLabel($"Rarity: {rarity.displayName}", 16);
       upgradableView.Add(entityRarityLabel);
 
@@ -120,7 +120,7 @@ namespace MetaPackageDebug
         {string.Join("\n", data.GetUpgradableCosts()
             .Select(cost =>
             {
-              Currency currency = MetaManager.Instance.GetCurrency(cost.currencyKind);
+              Currency currency = MetaManager.Instance.GetCurrency(cost.currencyReference);
               return $"{cost.quantity}x {(cost.quantity == 1 ? currency.GetDisplayNameSingular() : currency.GetDisplayNamePlural())}";
             })
           )}"

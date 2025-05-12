@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace MetaPackage
 {
-  public class MetaManagerUpgradablesComponent : MonoBehaviour
+  public class MetaManagerUpgradablesComponent : MetaManagerComponent
   {
     [SerializeField] private UpgradableCategoriesSettings upgradableCategoriesSettings;
     private ReadOnlyDictionary<(int, int), IBaseUpgradable> upgradableByKind;
@@ -17,12 +17,8 @@ namespace MetaPackage
     public Action<UpgradableKind, Enum> OnLevelChanged { get; set; }
     public Action<UpgradableKind, Enum> OnUpgradeAvailable { get; set; }
 
-    private bool hasBeenInitialized = false;
-    public void Initialize()
+    protected override void Setup()
     {
-      if (hasBeenInitialized)
-        return;
-
       Dictionary<(int, int), IBaseUpgradable> upgradableDict = new();
       Dictionary<UpgradableKind, BaseUpgradableCategorySettings> upgradableCategoryDict = new();
 
@@ -36,10 +32,21 @@ namespace MetaPackage
 
       foreach (var categorySettings in upgradableCategoriesSettings.upgradableCategorySettingsList)
       {
+        if (!categorySettings.ValidateReferences())
+        {
+          Debug.LogError($"Category settings {categorySettings.name} contains an invalid reference.");
+          continue;
+        }
         BaseUpgradableCategorySettings instantiatedCategorySettings = ScriptableObject.Instantiate(categorySettings);
         upgradableCategoryDict[categorySettings.upgradableKind] = instantiatedCategorySettings;
         foreach (var upgradableSettings in categorySettings.InternalUpgradableSettings)
         {
+          if (!upgradableSettings.ValidateReferences())
+          {
+            Debug.LogError($"Upgradable settings {upgradableSettings.name} contains an invalid reference.");
+            continue;
+          }
+
           var upgradable = ScriptableObject.Instantiate(upgradableSettings).InstantiateUpgradable();
           upgradableDict[((int)upgradableSettings.UpgradableKind, Convert.ToInt32(upgradableSettings.EntityKindAsEnum))] = upgradable;
           upgradable.OnUnlock += () => OnUnlock?.Invoke(upgradableSettings.UpgradableKind, upgradableSettings.EntityKindAsEnum);
@@ -51,8 +58,6 @@ namespace MetaPackage
 
       categorySettingsByKind = new(upgradableCategoryDict);
       upgradableByKind = new(upgradableDict);
-
-      hasBeenInitialized = true;
     }
 
     public T GetUpgradable<T>(UpgradableKind upgradableKind, Enum entityKind)

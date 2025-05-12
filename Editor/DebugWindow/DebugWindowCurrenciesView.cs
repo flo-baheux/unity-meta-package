@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MetaPackage;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -19,23 +20,24 @@ namespace MetaPackageDebug
 
         currenciesView.Add(new HelpBox("If you cannot find a currency, it's not configured properly in MetaManager", UnityEngine.UIElements.HelpBoxMessageType.Info));
 
-        var currenciesDropdown = new EnumField("Selected currency", CurrencyKind.ExampleCoins);
-        currenciesView.Add(currenciesDropdown);
+        // var allCurrencySettings = MetaManager.Instance.GetAllCurrencySettings();
+        // var currenciesDropdown = new DropdownField("Selected currency", 0, allCurrencySettings.Select(x => x.displayNamePlural));
+        // currenciesView.Add(currenciesDropdown);
 
-        Dictionary<CurrencyKind, VisualElement> viewByKind = new();
-        foreach (CurrencyKind currencyKind in Enum.GetValues(typeof(CurrencyKind)))
-        {
-          var currencyView = BuildCurrencyView(currencyKind);
-          SetVisible(currencyView, currencyKind.Equals(CurrencyKind.ExampleCoins));
-          viewByKind[currencyKind] = currencyView;
-          currenciesView.Add(currencyView);
-        }
+        // Dictionary<CurrencyReference, VisualElement> viewByKind = new();
+        // foreach (CurrencyReference currencyKind in Enum.GetValues(typeof(CurrencyReference)))
+        // {
+        //   var currencyView = BuildCurrencyView(currencyKind);
+        //   SetVisible(currencyView, currencyKind.Equals(CurrencyReference.ExampleCoins));
+        //   viewByKind[currencyKind] = currencyView;
+        //   currenciesView.Add(currencyView);
+        // }
 
-        currenciesDropdown.RegisterValueChangedCallback(e =>
-        {
-          foreach ((Enum key, var value) in viewByKind)
-            SetVisible(value, key.Equals(e.newValue));
-        });
+        // currenciesDropdown.RegisterValueChangedCallback(e =>
+        // {
+        //   foreach ((Enum key, var value) in viewByKind)
+        //     SetVisible(value, key.Equals(e.newValue));
+        // });
 
         return currenciesView;
 
@@ -47,11 +49,11 @@ namespace MetaPackageDebug
       }
     }
 
-    private VisualElement BuildCurrencyView(CurrencyKind currencyKind)
+    private VisualElement BuildCurrencyView(CurrencyReference currencyReference)
     {
       VisualElement currencyView = new Box();
 
-      var data = new CurrencyDataAccessor(currencyKind);
+      var data = new CurrencyDataAccessor(currencyReference);
 
       string currencyName = string.IsNullOrWhiteSpace(data.currency.GetDisplayNameSingular()) ? "[no display name]" : $"1 {data.currency.GetDisplayNameSingular()} / n {data.currency.GetDisplayNamePlural()}";
       var currencyNameLabel = BuildLabel($"Currency name: {currencyName}", 16);
@@ -116,14 +118,14 @@ namespace MetaPackageDebug
 
     private class CurrencyDataAccessor
     {
-      public CurrencyKind currencyKind;
+      public CurrencyReference currencyReference;
       public Currency currency;
       public CurrencySettings settings;
 
-      public CurrencyDataAccessor(CurrencyKind currencyKind)
+      public CurrencyDataAccessor(CurrencyReference currencyReference)
       {
-        this.currencyKind = currencyKind;
-        currency = MetaManager.Instance.GetCurrency(currencyKind);
+        this.currencyReference = currencyReference;
+        currency = MetaManager.Instance.GetCurrency(currencyReference);
         settings = currency.Settings;
       }
     }

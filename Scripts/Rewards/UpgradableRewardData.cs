@@ -6,6 +6,6 @@ namespace MetaPackage
   {
     public UpgradableKind upgradableKind;
     public Enum entityKind;
-    public RarityKind rarityKind;
+    public RarityReference rarity;
   }
 }

@@ -49,12 +49,8 @@ namespace MetaPackage
       OnUnlocked?.Invoke();
     }
 
-    public string GetDisplayNameSingular() => Settings.displayNameSingular;
-    public string GetDisplayNamePlural()
-      => string.IsNullOrWhiteSpace(Settings.displayNamePlural)
-        ? Settings.displayNameSingular
-        : Settings.displayNamePlural;
-
+    public string GetDisplayNameSingular() => Settings.DisplayNameSingular;
+    public string GetDisplayNamePlural() => Settings.DisplayNamePlural;
 
     public Sprite GetSingleIcon() => Settings.singleIcon;
     public Sprite GetMultipleIcon()
@@ -70,7 +66,7 @@ namespace MetaPackage
 
     public CurrencySaveData GetSaveData() => new()
     {
-      currencyKind = Settings.currencyKind,
+      currency = Settings.currencyReference,
       isUnlocked = IsUnlocked,
       quantity = Quantity,
     };

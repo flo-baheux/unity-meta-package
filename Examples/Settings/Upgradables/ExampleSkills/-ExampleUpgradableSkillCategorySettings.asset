@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: -ExampleUpgradableSkillCategorySettings
   m_EditorClassIdentifier: 
   rarityLevelsSettings:
-  - rarityKind: 0
+  - rarity:
+      _name: Rare
+      _ID: e683636c-d68b-44c3-935e-0ba49672b7cc
     levelsSettings:
     - experienceToNextLevel: 0
       costsToUpgrade: []
@@ -21,7 +23,9 @@ MonoBehaviour:
     - experienceToNextLevel: 0
       costsToUpgrade: []
       cooldown: 0
-  - rarityKind: 1
+  - rarity:
+      _name: LEGNENDAYRRYYYYYY
+      _ID: d634ebbd-0959-4115-9f0c-49a7adc574b3
     levelsSettings:
     - experienceToNextLevel: 0
       costsToUpgrade: []
@@ -29,7 +33,9 @@ MonoBehaviour:
     - experienceToNextLevel: 0
       costsToUpgrade: []
       cooldown: 0
-  - rarityKind: 2
+  - rarity:
+      _name: Rare
+      _ID: e683636c-d68b-44c3-935e-0ba49672b7cc
     levelsSettings:
     - experienceToNextLevel: 0
       costsToUpgrade: []

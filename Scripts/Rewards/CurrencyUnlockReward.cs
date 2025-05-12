@@ -9,13 +9,13 @@ namespace MetaPackage
 
     public override void Claim()
     {
-      MetaManager.Instance.GetCurrency(settings.currencyKind).Unlock();
+      MetaManager.Instance.GetCurrency(settings.currencyReference).Unlock();
     }
 
     public override Sprite GetSprite()
-      => MetaManager.Instance.GetCurrency(settings.currencyKind).GetSingleIcon();
+      => MetaManager.Instance.GetCurrency(settings.currencyReference).GetSingleIcon();
 
     public override string GetText()
-      => MetaManager.Instance.GetCurrency(settings.currencyKind).GetDisplayNameSingular();
+      => MetaManager.Instance.GetCurrency(settings.currencyReference).GetDisplayNameSingular();
   }
 }

@@ -5,7 +5,13 @@ namespace MetaPackage
   [Serializable]
   public class UpgradableUpgradeCost
   {
-    public CurrencyKind currencyKind;
+    public CurrencyReference currencyReference;
     public int quantity;
+
+    public bool ValidateReferences()
+    {
+      var currency = MetaManager.Instance.GetCurrency(currencyReference);
+      return currency != null;
+    }
   }
 }

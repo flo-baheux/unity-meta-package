@@ -10,7 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c784c0abf12ea72419abee8e9ef1b580, type: 3}
-  m_Name: Currencies
+  m_Name: CurrencyDatabase
   m_EditorClassIdentifier: 
   currencySettingsList:
-  - {fileID: 11400000, guid: c8ffdcf47fb836e4db4ac1364e07aed1, type: 2}
+  - name: 
+    _ID: 75d2390d-04a9-4cee-869c-1e122f28b5b0
+    currencyReference:
+      _name: 
+      _ID: 
+    singleIcon: {fileID: 0}
+    multipleIcon: {fileID: 0}
+    unlockedByDefault: 0
+    minimumQuantity: 0
+    hasMaximumQuantity: 0
+    maximumQuantity: 0

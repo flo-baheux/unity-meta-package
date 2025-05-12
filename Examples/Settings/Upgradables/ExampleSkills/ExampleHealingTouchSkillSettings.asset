@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: Healing Touch
   icon: {fileID: 0}
-  rarityKind: 2
+  rarity:
+    _name: Rare
+    _ID: e683636c-d68b-44c3-935e-0ba49672b7cc
   unlockedByDefault: 0
   eligibleForRewards: 1
   entityKind: 2
