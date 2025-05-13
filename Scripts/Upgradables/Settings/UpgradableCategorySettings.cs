@@ -89,7 +89,7 @@ namespace MetaPackage
 #if UNITY_EDITOR
     public void CustomValidation()
     {
-      name = MetaManager.Instance.GetRaritySettings(rarityKind).displayName;
+      name = rarityKind.ToString();
       for (int i = 0; i < levelsSettings.Count; i++)
       {
         levelsSettings[i].SetName($"Level {i + 1}");

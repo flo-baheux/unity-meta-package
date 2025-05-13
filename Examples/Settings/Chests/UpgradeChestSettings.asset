@@ -22,4 +22,6 @@ MonoBehaviour:
   maxRewards: 0
   maxOfEachReward: 0
   rarityUpgradeChestDatas: []
-  customUpgradeChestDatas: []
+  customUpgradeChestDatas:
+  - upgradable: {fileID: 11400000, guid: 2f70bd0d14306a54b8e0efe877044e12, type: 2}
+    quantity: 0
