@@ -8,12 +8,14 @@ namespace MetaPackage
   {
     public abstract UpgradableKind UpgradableKind { get; }
     public abstract Enum EntityKindAsEnum { get; }
+    public abstract UpgradableRewardData RewardData { get; }
     public string displayName;
     public Sprite icon;
     public RarityKind rarityKind;
 
     public bool unlockedByDefault = false;
     public bool eligibleForRewards = true;
+
 
     public abstract IBaseUpgradable InstantiateUpgradable();
   }
@@ -24,6 +26,15 @@ namespace MetaPackage
   {
     public T_EntityKind entityKind;
     public override Enum EntityKindAsEnum { get => entityKind; }
+    public override UpgradableRewardData RewardData
+    {
+      get => new()
+      {
+        upgradableKind = UpgradableKind,
+        entityKind = EntityKindAsEnum,
+        rarityKind = rarityKind
+      };
+    }
     public UpgradableCategorySettings<T_EntityKind, T_LevelSettings> CategorySettings;
 
     private List<T_LevelSettings> _levelsSettings;

@@ -13,7 +13,7 @@ namespace MetaPackage
         case RewardKind.TrackRewardPoints:
           return new TrackRewardPointsReward(settings);
         case RewardKind.UpgradeChest:
-          return new UpgradableChestReward(settings);
+          return new UpgradeChestReward(settings);
         case RewardKind.UpgradableUnlock:
           return new UpgradableUnlockReward(settings);
         case RewardKind.Currency:

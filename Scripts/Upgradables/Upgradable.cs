@@ -54,24 +54,18 @@ namespace MetaPackage
     where T_LevelSettings : UpgradableLevelSettings
   {
     public T_UpgradableSettings Settings { get; private set; }
+    public UpgradableRewardData RewardData { get => Settings.RewardData; }
 
     public Upgradable(T_UpgradableSettings settings)
     {
       Settings = settings;
       IsUnlocked = Settings.unlockedByDefault;
 
-      _rewardData = new()
-      {
-        upgradableKind = Settings.UpgradableKind,
-        entityKind = Settings.entityKind,
-        rarityKind = Settings.rarityKind
-      };
-
       if (!IBaseUpgradable.entityKindByUpgradableKind.ContainsKey(Settings.UpgradableKind))
         IBaseUpgradable.entityKindByUpgradableKind[Settings.UpgradableKind] = typeof(T_EntityKind);
     }
 
-    private UpgradableRewardData _rewardData;
+
 
     public Action OnUnlock { get; set; }
     public Action OnLevelChanged { get; set; }
@@ -95,8 +89,6 @@ namespace MetaPackage
 
     public int MaxLevel => Settings.LevelsSettings.Count() - 1;
     public int ExperienceRelativeToLevel => Experience - Settings.LevelsSettings.Take(Level).Sum(x => x.experienceToNextLevel);
-
-    public UpgradableRewardData RewardData { get => _rewardData; }
 
     public T_LevelSettings PreviousLevelSettings => IsCurrentLevelFirst ? null : Settings.LevelsSettings.ElementAt(Level - 1);
     public T_LevelSettings CurrentLevelSettings => Settings.LevelsSettings.ElementAt(Level);

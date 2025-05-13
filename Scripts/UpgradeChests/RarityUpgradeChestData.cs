@@ -11,4 +11,6 @@ namespace MetaPackage
     [HelpBox("How much it contributes towards Max Rewards / Max Of Each Reward")]
     public int rewardCountValue;
   }
+
+
 }
