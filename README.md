@@ -25,7 +25,7 @@ UI components have a dependency on DOTWeen, feel free to comment out the code, u
 ## Entities
 
 The meta package encompass multiple entities. While most of the time it only requires updating an enum, some entities need more setup. Details below.
-Each entity has a Scriptable Object (SO) settings list, available in `MetaPackage/Settings` 
+Each entity has a Scriptable Object (SO) settings list, available in `MetaPackage/Databases` 
 
 <aside>
 
@@ -41,9 +41,9 @@ Currencies can be used for anything in the game. However, by default, currencies
 
 To define a new currency, you need to:
 
-1. add an entry in the  `CurrencyKind` enum inside `MetaPackage/Scripts/Currencies/CurrencyKind.cs`
+1. add an entry in the  `CurrencyKind` enum inside `MetaPackage/Databases/CurrencyKind.cs`
 2. Create a new CurrencySettings SO (right click in Project - `Create/MetaPackage/Currency`) and set the Currency Kind accordingly
-3. Add the newly created SO inside the list in `MetaPackage/Settings/Currencies`
+3. Add the newly created SO inside the list in `MetaPackage/Databases/CurrencyDatabase`
 
 The currency is now available from anywhere in the project.
 
@@ -73,9 +73,9 @@ Rarities are linked to upgradables, as an upgradable have settings and levels ba
 
 To add a new rarity, you need to: 
 
-1. add an entry in the `RarityKind` enum inside `MetaPackage/Scripts/Rarities/RarityKind.cs`
+1. add an entry in the `RarityKind` enum inside `MetaPackage/Databases/RarityKind.cs`
 2. Create a new RaritySettings SO (right click in Project - `Create/MetaPackage/Rarity`) and set the Rarity Kind accordingly
-3. Add the newly created SO inside the list in `MetaPackage/Settings/Rarities`
+3. Add the newly created SO inside the list in `MetaPackage/Databases/RarityDatabase`
 
 The rarity is now available from anywhere in the project.
 
@@ -96,16 +96,16 @@ Chests are a mean to reward experience points to upgradables, in a randomly fash
 
 To add a new chest, you need to:
 
-1. add an entry in the `ChestKind` enum inside `MetaPackage/Scripts/Chests/ChestKind.cs`
-2. Create a new ChestSettings SO (right click in Project - `Create/MetaPackage/Chest`) and set the Chest Kind accordingly
-3. Add the newly created SO inside the list in `MetaPackage/Settings/Chests`
+1. add an entry in the `ChestKind` enum inside `MetaPackage/Databases/ChestKind.cs`
+2. Create a new ChestSettings SO (right click in Project - `Create/MetaPackage/UpgradeChest`) and set the Chest Kind accordingly
+3. Add the newly created SO inside the list in `MetaPackage/Databases/UpgradeChestDatabase`
 
 The chest is now available from anywhere in the project.
 
 A default Normal chest is already setup as an example and can be used.
 
 ```csharp
-ChestSettings chestSettings = MetaManager.Instance.GetChestSettings(ChestKind.Normal);
+ChestSettings chestSettings = MetaManager.Instance.GetUpgradeChestSettings(UpgradeChestKind.Normal);
 ```
 
 ## Tracks / Steps
@@ -113,7 +113,7 @@ ChestSettings chestSettings = MetaManager.Instance.GetChestSettings(ChestKind.No
 For simplicity's sake, let's say you want to create a `CustomTrack` track.
 To define a new track and associated steps, you need to:
 
-1. Add an entry in the `TrackKind` enum inside `MetaPackage/Scripts/Tracks/TrackKind.cs`
+1. Add an entry in the `TrackKind` enum inside `MetaPackage/Databases/TrackKind.cs`
 2. Copy paste the content of the `MetaPackage/Examples/Scripts/Upgradables/ExampleSkills` anywhere in your project
 3. Edit the newly created files by replacing `ExampleLeague` everywhere with what suits you
 
@@ -139,7 +139,7 @@ example for ExampleLeagueTrack:
 4. Create a new TrackSettings SO (right click in Project - `Create/MetaPackage/Tracks/CustomTrackSettings`)
 5. Create a new TrackStepSettings SO (right click in Project - `Create/MetaPackage/Tracks/Steps/CustomTrackStepSettings`)
 6. Inside the created TrackSettings SO, add a step and link the TrackStepSettings SO
-7. Add the created TrackSettings SO inside the list in `MetaPackage/Settings/Tracks`
+7. Add the created TrackSettings SO inside the list in `MetaPackage/Databases/TrackDatabase`
 
 The track is now available from anywhere in the project.
 
@@ -154,7 +154,7 @@ All default capabilities [can be found here](./Scripts/Tracks/BaseTrack.cs)
 For simplicity's sake, let's say you want to create an `UpgradableWeapon` weapon.
 To define a new upgradable kind and be able to define a list of upgradables, you need to:
 
-1. Add an entry in the `UpgradableKind` enum inside `MetaPackage/Scripts/Upgradables/UpgradableKind.cs`
+1. Add an entry in the `UpgradableKind` enum inside `MetaPackage/Databases/UpgradableKind.cs`
 2. Copy paste the content of the `MetaPackage/Examples/Scripts/Upgradables/ExampleSkills` anywhere in your project
 3. Edit the newly created files by replacing `ExampleUpgradableSkill` everywhere with what suits you
 
@@ -181,7 +181,7 @@ example for ExampleUpgradableSkill:
 5. Create a new UpgradableSettings SO (right click in Project - `Create/MetaPackage/Tracks/Steps/UpgradableWeaponSettings`)
 6. Inside the created UpgradableCategorySettings SO, link the new UpgradableSettings SO
 7. Inside the created UpgradableSettings SO, link the new UpgradableCategorySettings SO (It's a two way relationship!)
-8. Add the created UpgradableCategorySettings SO inside the list in `MetaPackage/Settings/UpgradableCategories`
+8. Add the created UpgradableCategorySettings SO inside the list in `MetaPackage/Databases/UpgradableCategories`
 
 The upgradable is now available from anywhere in the project.
 
@@ -192,4 +192,4 @@ The upgradable is now available from anywhere in the project.
   );
 ```
 
-All default capabilities [can be found here](./Scripts/Upgradables/UpgradableEntity.cs)
+All default capabilities [can be found here](./Scripts/Upgradables/Upgradable.cs)

@@ -12,7 +12,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ac823a935a61d4d8adf5127612fe5d, type: 3}
   m_Name: -ExampleUpgradableSkillCategorySettings
   m_EditorClassIdentifier: 
-  rarityLevelsSettings: []
+  warnings: []
+  errors:
+  - 'Requires at least one level for each rarity.
+
+    Rarity with no levels configured:
+    ExampleRare'
+  rarityLevelsSettings:
+  - name: Common
+    rarityKind: 0
+    levelsSettings:
+    - name: Level 1
+      experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+  - name: Uncommon
+    rarityKind: 1
+    levelsSettings:
+    - name: Level 1
+      experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+  - name: Rare
+    rarityKind: 2
+    levelsSettings: []
+  - name: Epic
+    rarityKind: 3
+    levelsSettings:
+    - name: Level 1
+      experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+  - name: Legendary
+    rarityKind: 4
+    levelsSettings:
+    - name: Level 1
+      experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+    - name: Level 2
+      experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+    - name: Level 3
+      experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+    - name: Level 4
+      experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
   upgradableSettings:
   - {fileID: 11400000, guid: 2f70bd0d14306a54b8e0efe877044e12, type: 2}
   - {fileID: 11400000, guid: 34418059b47e7474ba56b89c43e3faa8, type: 2}
