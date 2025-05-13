@@ -8,7 +8,7 @@ namespace MetaPackage
 {
   public class MetaManagerCurrenciesComponent : MetaManagerComponent
   {
-    [SerializeField] private CurrenciesSettings currenciesSettings;
+    [SerializeField] private CurrencyDatabase currenciesSettings;
     private ReadOnlyDictionary<CurrencyKind, Currency> currenciesByKind;
 
     public Action<CurrencyKind, (int oldValue, int newValue)> OnCurrencyQuantityChanged;

@@ -11,13 +11,13 @@ namespace MetaPackage
     public int experienceToNextLevel;
     public List<UpgradableUpgradeCost> costsToUpgrade;
 
-    public void CustomOnValidate(string name = null)
+#if UNITY_EDITOR
+    public void CustomValidation()
     {
-      if (name != null)
-        this.name = name;
-
-      for (int i = 0; i < costsToUpgrade.Count; i++)
-        costsToUpgrade[i].CustomOnValidate();
+      costsToUpgrade.ForEach(x => x.CustomValidation());
     }
+
+    public void SetName(string name) => this.name = name;
+#endif
   }
 }

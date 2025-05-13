@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d778e9734c205b947a77dad557706f96, type: 3}
-  m_Name: Tracks
+  m_Script: {fileID: 11500000, guid: 38cf10e4b7f83934998f7630c03216c8, type: 3}
+  m_Name: UpgradableCategoryDatabase
   m_EditorClassIdentifier: 
-  trackSettingsList:
-  - {fileID: 11400000, guid: e46a926f6e0320c4d9dbb8253fe9631d, type: 2}
-  - {fileID: 11400000, guid: 367ff4371cb3b4b4ab01780f6d22ac45, type: 2}
+  upgradableCategorySettingsList:
+  - {fileID: 11400000, guid: 56a7e1319e038b64288f62a281ade04a, type: 2}

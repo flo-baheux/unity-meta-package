@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fde39b8b25b5d3478e7afdb3400179a, type: 3}
   m_Name: ExampleNormalUpgradeChestSettings
   m_EditorClassIdentifier: 
-  kind: 0
+  upgradeChestKind: 1
   displayName: Normal Chest
   icon: {fileID: 0}
   iconTop: {fileID: 0}
@@ -20,10 +20,4 @@ MonoBehaviour:
   upgradableKind: 0
   maxRewards: 10
   maxOfEachReward: 3
-  rarityChestDatas:
-  - rarity: 0
-    weight: 8
-    rewardCountValue: 1
-  - rarity: 2
-    weight: 2
-    rewardCountValue: 3
+  rarityUpgradeChestDatas: []

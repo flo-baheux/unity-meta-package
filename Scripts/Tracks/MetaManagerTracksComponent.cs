@@ -8,7 +8,7 @@ namespace MetaPackage
 {
   public class MetaManagerTracksComponent : MetaManagerComponent
   {
-    [SerializeField] private TracksSettings tracksSettings;
+    [SerializeField] private TrackDatabase tracksSettings;
     private ReadOnlyDictionary<TrackKind, IBaseTrack> metaTrackByKeyName;
     public List<TrackKind> ConfiguredTrackKinds => metaTrackByKeyName.Keys.ToList();
 

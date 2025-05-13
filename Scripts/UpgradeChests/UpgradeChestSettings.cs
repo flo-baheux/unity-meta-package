@@ -6,7 +6,7 @@ namespace MetaPackage
   [CreateAssetMenu(menuName = "MetaPackage/UpgradeChest", fileName = "UpgradeChestSettings")]
   public class UpgradeChestSettings : ScriptableObject
   {
-    public UpgradeChestKind kind;
+    public UpgradeChestKind upgradeChestKind;
     public string displayName;
     public Sprite icon;
     public Sprite iconTop;

@@ -82,7 +82,7 @@ The rarity is now available from anywhere in the project.
 A default set of rarities are already setup as an example and can be used:
 Uncommon, Common, Rare, Epic, Legendary
 
-It’s of course possible to remove rarities from the RaritiesSettings list and RarityKind enum to restrict the list.
+It’s of course possible to remove rarities from the RarityDatabase list and RarityKind enum to restrict the list.
 
 ```csharp
 RaritySettings raritySettings = MetaManager.Instance.GetRaritySettings(RarityKind.Rare);

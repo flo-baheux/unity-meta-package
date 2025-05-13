@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46bee6219bcde5b419b6a02873da23b3, type: 3}
-  m_Name: Chests
+  m_Name: UpgradableChestDatabase
   m_EditorClassIdentifier: 
+  warningMessages: []
+  errorMessages: []
   upgradeChestSettingsList:
   - {fileID: 11400000, guid: 4c247737ecd0a3548b9d27190ee5d314, type: 2}

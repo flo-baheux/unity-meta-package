@@ -6,7 +6,7 @@ namespace MetaPackage
 {
   public class MetaManagerUpgradeChestsComponent : MetaManagerComponent
   {
-    [SerializeField] private UpgradeChestsSettings upgradeChestsSettings;
+    [SerializeField] private UpgradeChestDatabase upgradeChestsSettings;
     public ReadOnlyDictionary<UpgradeChestKind, UpgradeChestSettings> upgradeChestSettingsByKind;
 
     protected override void Setup()
@@ -23,7 +23,7 @@ namespace MetaPackage
       foreach (var upgradeChestSettings in upgradeChestsSettings.upgradeChestSettingsList)
       {
         var instantiatedUpgradeChestSettings = ScriptableObject.Instantiate(upgradeChestSettings);
-        dict[upgradeChestSettings.kind] = instantiatedUpgradeChestSettings;
+        dict[upgradeChestSettings.upgradeChestKind] = instantiatedUpgradeChestSettings;
       }
       upgradeChestSettingsByKind = new(dict);
     }

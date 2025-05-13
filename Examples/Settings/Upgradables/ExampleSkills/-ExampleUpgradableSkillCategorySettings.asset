@@ -12,31 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ac823a935a61d4d8adf5127612fe5d, type: 3}
   m_Name: -ExampleUpgradableSkillCategorySettings
   m_EditorClassIdentifier: 
-  rarityLevelsSettings:
-  - rarityKind: 0
-    levelsSettings:
-    - experienceToNextLevel: 0
-      costsToUpgrade: []
-      cooldown: 0
-    - experienceToNextLevel: 0
-      costsToUpgrade: []
-      cooldown: 0
-  - rarityKind: 1
-    levelsSettings:
-    - experienceToNextLevel: 0
-      costsToUpgrade: []
-      cooldown: 0
-    - experienceToNextLevel: 0
-      costsToUpgrade: []
-      cooldown: 0
-  - rarityKind: 2
-    levelsSettings:
-    - experienceToNextLevel: 0
-      costsToUpgrade: []
-      cooldown: 0
-    - experienceToNextLevel: 0
-      costsToUpgrade: []
-      cooldown: 0
+  rarityLevelsSettings: []
   upgradableSettings:
   - {fileID: 11400000, guid: 2f70bd0d14306a54b8e0efe877044e12, type: 2}
   - {fileID: 11400000, guid: 34418059b47e7474ba56b89c43e3faa8, type: 2}

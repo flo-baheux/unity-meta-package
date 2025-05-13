@@ -7,7 +7,7 @@ namespace MetaPackage
 {
   public class MetaManagerRaritiesComponent : MetaManagerComponent
   {
-    [SerializeField] private RaritiesSettings raritiesSettings;
+    [SerializeField] private RarityDatabase raritiesSettings;
     public ReadOnlyDictionary<RarityKind, RaritySettings> raritySettingsByKind;
 
     protected override void Setup()
@@ -24,7 +24,7 @@ namespace MetaPackage
       foreach (var raritySettings in raritiesSettings.raritySettingsList)
       {
         var instantiatedRaritySettings = ScriptableObject.Instantiate(raritySettings);
-        dict[raritySettings.kind] = instantiatedRaritySettings;
+        dict[raritySettings.rarityKind] = instantiatedRaritySettings;
       }
       raritySettingsByKind = new(dict);
     }

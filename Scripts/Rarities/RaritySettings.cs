@@ -3,9 +3,9 @@
 namespace MetaPackage
 {
   [CreateAssetMenu(menuName = "MetaPackage/Rarity", fileName = "RaritySettings")]
-  public class RaritySettings: ScriptableObject
+  public class RaritySettings : ScriptableObject
   {
-    public RarityKind kind;
+    public RarityKind rarityKind;
     public string displayName;
     public Color color;
   }

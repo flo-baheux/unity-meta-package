@@ -8,7 +8,7 @@ namespace MetaPackage
 {
   public class MetaManagerUpgradablesComponent : MetaManagerComponent
   {
-    [SerializeField] private UpgradableCategoriesSettings upgradableCategoriesSettings;
+    [SerializeField] private UpgradableCategoryDatabase upgradableCategoriesSettings;
     private ReadOnlyDictionary<(int, int), IBaseUpgradable> upgradableByKind;
     private ReadOnlyDictionary<UpgradableKind, BaseUpgradableCategorySettings> categorySettingsByKind;
 
