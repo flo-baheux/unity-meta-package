@@ -2,7 +2,6 @@
 using System.IO;
 using System.IO.Compression;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEditor;
 using UnityEngine;
 
 namespace MetaPackage
@@ -66,12 +65,13 @@ namespace MetaPackage
 
     public void LoadSave()
     {
-      isLoadingSave = true;
       if (!File.Exists(SaveFilePath))
       {
         Debug.LogWarning($"[Meta Manager] - No save file found ({SaveFilePath})");
         return;
       }
+
+      isLoadingSave = true;
 
       try
       {

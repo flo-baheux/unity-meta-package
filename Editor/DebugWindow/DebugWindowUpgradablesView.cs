@@ -18,6 +18,17 @@ namespace MetaPackageDebug
 
         upgradablesView.Add(new HelpBox("If you cannot find an entity, it's not configured properly in MetaManager", UnityEngine.UIElements.HelpBoxMessageType.Info));
 
+        List<UpgradableDataAccessor> allUpgradableData = new();
+
+        var unlockAllButton = new Button(() => allUpgradableData.ForEach(x => x.upgradable.Unlock()));
+        unlockAllButton.text = "Unlock all upgradables";
+        BindActionToElement(unlockAllButton, () =>
+        {
+          bool allUnlocked = allUpgradableData.All(x => x.upgradable.IsUnlocked);
+          SetVisible(unlockAllButton, !allUnlocked);
+        });
+        upgradablesView.Add(unlockAllButton);
+
         List<UpgradableKind> upgradableKinds = IBaseUpgradable.entityKindByUpgradableKind.Keys.ToList();
         List<string> upgradableKindsAsString = upgradableKinds.Select(x => x.ToString()).ToList();
         DropdownField upgradableKindDropdown = new("Selected upgradable", upgradableKindsAsString, upgradableKindsAsString[0]);
@@ -30,6 +41,7 @@ namespace MetaPackageDebug
         var entityKindDropdown = new DropdownField("Selected entity");
 
         upgradablesView.Add(entityKindDropdown);
+
         foreach (UpgradableKind upgradableKind in upgradableKinds)
         {
           List<Enum> entityKinds = Enum.GetValues(IBaseUpgradable.entityKindByUpgradableKind[upgradableKind]).OfType<Enum>().ToList();
@@ -39,6 +51,7 @@ namespace MetaPackageDebug
           {
             var data = UpgradableDataAccessor.Build(upgradableKind, entityKind);
 
+            allUpgradableData.Add(data);
             var upgradableView = BuildUpgradableView(data);
             upgradablesView.Add(upgradableView);
             SetVisible(upgradableView, upgradableKind.Equals(upgradableKinds[0]) && entityKind.Equals(entityKinds[0]));
