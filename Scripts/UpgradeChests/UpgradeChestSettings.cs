@@ -15,13 +15,10 @@ namespace MetaPackage
     public Sprite iconBottom;
     public UpgradableKind upgradableKind;
 
-    [ShowIf("isCustom", false)]
     public int maxRewards;
-    [ShowIf("isCustom", false)]
     public int maxOfEachReward;
-
-    // FIXME: Custom UpgradeChestSettings editor to hide the wrong one
     public List<RarityUpgradeChestData> rarityUpgradeChestDatas;
+
     public List<CustomUpgradeChestData> customUpgradeChestDatas;
 
     public override void CustomValidation()

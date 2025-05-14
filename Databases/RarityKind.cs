@@ -3,9 +3,7 @@
   public enum RarityKind
   {
     ExampleCommon,
-    ExampleUncommon,
     ExampleRare,
-    ExampleEpic,
-    ExampleLegendary
+    ExampleEpic
   }
 }

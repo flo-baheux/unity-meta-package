@@ -13,52 +13,26 @@ MonoBehaviour:
   m_Name: -ExampleUpgradableSkillCategorySettings
   m_EditorClassIdentifier: 
   warnings: []
-  errors:
-  - 'Requires at least one level for each rarity.
-
-    Rarity with no levels configured:
-    ExampleRare'
+  errors: []
   rarityLevelsSettings:
-  - name: Common
+  - name: ExampleCommon
     rarityKind: 0
     levelsSettings:
     - name: Level 1
       experienceToNextLevel: 0
       costsToUpgrade: []
       cooldown: 0
-  - name: Uncommon
+  - name: ExampleRare
     rarityKind: 1
     levelsSettings:
     - name: Level 1
       experienceToNextLevel: 0
       costsToUpgrade: []
       cooldown: 0
-  - name: Rare
+  - name: ExampleEpic
     rarityKind: 2
-    levelsSettings: []
-  - name: Epic
-    rarityKind: 3
     levelsSettings:
     - name: Level 1
-      experienceToNextLevel: 0
-      costsToUpgrade: []
-      cooldown: 0
-  - name: Legendary
-    rarityKind: 4
-    levelsSettings:
-    - name: Level 1
-      experienceToNextLevel: 0
-      costsToUpgrade: []
-      cooldown: 0
-    - name: Level 2
-      experienceToNextLevel: 0
-      costsToUpgrade: []
-      cooldown: 0
-    - name: Level 3
-      experienceToNextLevel: 0
-      costsToUpgrade: []
-      cooldown: 0
-    - name: Level 4
       experienceToNextLevel: 0
       costsToUpgrade: []
       cooldown: 0
