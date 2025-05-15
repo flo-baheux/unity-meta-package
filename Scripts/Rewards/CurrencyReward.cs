@@ -18,8 +18,12 @@ namespace MetaPackage
         : MetaManager.Instance.GetCurrency(settings.currencyKind).GetMultipleIcon();
 
     public override string GetText()
-      => settings.quantity == 1
+    {
+      string displayText = settings.quantity == 1
         ? MetaManager.Instance.GetCurrency(settings.currencyKind).GetDisplayNameSingular()
         : MetaManager.Instance.GetCurrency(settings.currencyKind).GetDisplayNamePlural();
+
+      return $"{settings.quantity} {displayText}";
+    }
   }
 }
