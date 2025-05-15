@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using MetaPackage;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,15 +19,15 @@ namespace MetaPackageDebug
         VisualElement currenciesView = new Box();
 
         currenciesView.Add(new HelpBox("If you cannot find a currency, it's not configured properly in MetaManager", UnityEngine.UIElements.HelpBoxMessageType.Info));
-
-        var currenciesDropdown = new EnumField("Selected currency", CurrencyKind.ExampleCoins);
+        var firstCurrencyInEnum = Enum.GetValues(typeof(CurrencyKind)).Cast<CurrencyKind>().ElementAt(0);
+        var currenciesDropdown = new EnumField("Selected currency", firstCurrencyInEnum);
         currenciesView.Add(currenciesDropdown);
 
         Dictionary<CurrencyKind, VisualElement> viewByKind = new();
         foreach (CurrencyKind currencyKind in Enum.GetValues(typeof(CurrencyKind)))
         {
           var currencyView = BuildCurrencyView(currencyKind);
-          SetVisible(currencyView, currencyKind.Equals(CurrencyKind.ExampleCoins));
+          SetVisible(currencyView, currencyKind.Equals(firstCurrencyInEnum));
           viewByKind[currencyKind] = currencyView;
           currenciesView.Add(currencyView);
         }

@@ -45,12 +45,15 @@ namespace MetaPackageDebug
         foreach (UpgradableKind upgradableKind in upgradableKinds)
         {
           List<Enum> entityKinds = Enum.GetValues(IBaseUpgradable.entityKindByUpgradableKind[upgradableKind]).OfType<Enum>().ToList();
-          entityKindsByUpgradableKind[upgradableKind] = entityKinds;
+          List<Enum> usableEntityKinds = new();
 
           foreach (Enum entityKind in entityKinds)
           {
             var data = UpgradableDataAccessor.Build(upgradableKind, entityKind);
+            if (data == null)
+              continue;
 
+            usableEntityKinds.Add(data.entityKind);
             allUpgradableData.Add(data);
             var upgradableView = BuildUpgradableView(data);
             upgradablesView.Add(upgradableView);
@@ -59,6 +62,8 @@ namespace MetaPackageDebug
             viewByKinds[(upgradableKind, entityKind)] = upgradableView;
             entityDropdownLabelByKind[(upgradableKind, entityKind)] = SanitizeForDropdown($"{entityKind} {(data != null ? $"({data.settings.displayName})" : "")}");
           }
+
+          entityKindsByUpgradableKind[upgradableKind] = usableEntityKinds;
         }
 
         entityKindDropdown.choices = entityKindsByUpgradableKind[upgradableKinds[0]].Select(entityKind => entityDropdownLabelByKind[(upgradableKinds[0], entityKind)]).ToList();
@@ -240,6 +245,7 @@ namespace MetaPackageDebug
       private UpgradableDataAccessor(UpgradableKind upgradableKind, Enum entityKind)
       {
         this.upgradableKind = upgradableKind;
+        this.entityKind = entityKind;
         upgradable = MetaManager.Instance.GetUpgradable(upgradableKind, entityKind);
         if (upgradable == null)
           return;
