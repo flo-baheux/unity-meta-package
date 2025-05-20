@@ -72,8 +72,6 @@ namespace MetaPackage
         IBaseUpgradable.entityKindByUpgradableKind[Settings.UpgradableKind] = typeof(T_EntityKind);
     }
 
-
-
     public Action OnUnlock { get; set; }
     public Action OnLevelChanged { get; set; }
     public Action OnExperienceIncreased { get; set; }
@@ -100,7 +98,7 @@ namespace MetaPackage
     public T_LevelSettings CurrentLevelSettings => Settings.LevelsSettings.ElementAt(Level);
     public T_LevelSettings NextLevelSettings => IsCurrentLevelLast ? null : Settings.LevelsSettings.ElementAt(Level + 1);
 
-    public bool IsCurrentLevelFirst => Level == 0;
+    public bool IsCurrentLevelFirst => Level == 1;
     public bool IsCurrentLevelLast => Level == MaxLevel;
     public bool IsEligibleForRewards { get => Settings.eligibleForRewards && IsUnlocked; }
 

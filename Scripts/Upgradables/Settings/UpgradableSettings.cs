@@ -42,7 +42,7 @@ namespace MetaPackage
     {
       get
       {
-        if (_levelsSettings == null)
+        if (_levelsSettings == null || _levelsSettings.Count == 0)
         {
           _levelsSettings = CategorySettings
             .rarityLevelsSettings

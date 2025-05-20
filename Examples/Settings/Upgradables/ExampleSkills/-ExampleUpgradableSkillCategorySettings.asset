@@ -26,6 +26,14 @@ MonoBehaviour:
       experienceToNextLevel: 0
       costsToUpgrade: []
       cooldown: 0
+    - name: Level 2
+      experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
+    - name: Level 3
+      experienceToNextLevel: 0
+      costsToUpgrade: []
+      cooldown: 0
   - name: ExampleRare
     rarityKind: 1
     levelsSettings:
