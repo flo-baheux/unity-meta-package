@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 namespace MetaPackage
@@ -105,32 +104,30 @@ namespace MetaPackage
 
     private byte[] SaveDataToByteArray(MetaSaveData saveData)
     {
-      MemoryStream memoryStream = new();
-      new BinaryFormatter().Serialize(memoryStream, saveData);
+      string json = JsonUtility.ToJson(saveData);
+      byte[] jsonBytes = System.Text.Encoding.UTF8.GetBytes(json);
 
-      using MemoryStream compressedStream = new();
-      using (GZipStream gz = new(compressedStream, CompressionMode.Compress, true))
+      using MemoryStream outputStream = new();
+      using (GZipStream gz = new(outputStream, CompressionMode.Compress))
       {
-        memoryStream.Position = 0;
-        memoryStream.CopyTo(gz);
+        gz.Write(jsonBytes, 0, jsonBytes.Length);
       }
-      return compressedStream.ToArray();
+      return outputStream.ToArray();
     }
 
     private MetaSaveData ByteArrayToSaveData(byte[] rawSaveData)
     {
-      MetaSaveData saveData;
       using (MemoryStream compressedStream = new(rawSaveData))
+      using (GZipStream gz = new(compressedStream, CompressionMode.Decompress))
+      using (MemoryStream decompressedStream = new())
       {
-        using GZipStream gz = new(compressedStream, CompressionMode.Decompress, true);
-        using MemoryStream decompressedStream = new();
         gz.CopyTo(decompressedStream);
         decompressedStream.Position = 0;
 
-        BinaryFormatter formatter = new();
-        saveData = (MetaSaveData)formatter.Deserialize(decompressedStream);
+        string json = System.Text.Encoding.UTF8.GetString(decompressedStream.ToArray());
+        MetaSaveData saveData = JsonUtility.FromJson<MetaSaveData>(json);
+        return saveData;
       }
-      return saveData;
     }
 
     public void LiveResetSave()
