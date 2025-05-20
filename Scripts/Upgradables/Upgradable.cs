@@ -14,7 +14,6 @@ namespace MetaPackage
     public int Experience { get; }
     public int Level { get; }
     public int MaxLevel { get; }
-    public int DisplayLevel { get; }
 
     public void IncreaseExperience(int increaseBy);
     public void ForceSetLevel(int level);
@@ -79,13 +78,12 @@ namespace MetaPackage
       private set => _experience = Math.Clamp(value, 0, Settings.LevelsSettings.Sum(x => x.experienceToNextLevel));
     }
 
-    private int _level = 0;
+    private int _level = 1;
     public int Level
     {
       get => _level;
       private set => _level = Math.Clamp(value, 0, MaxLevel);
     }
-    public int DisplayLevel => Level + 1;
 
     public int MaxLevel => Settings.LevelsSettings.Count() - 1;
     public int ExperienceRelativeToLevel => Experience - Settings.LevelsSettings.Take(Level).Sum(x => x.experienceToNextLevel);

@@ -8,8 +8,7 @@ Configurable meta progression game system. Includes:
 - upgradable chests (XP distribution based on rarity)
 
 Note: 
-Not a "Unity Package" - requires you to edit enum files.
-One dependency on DOTween - comment or remove if unused.
+Not a "Unity Package" per se - requires you to edit enum files.
 
 [Design note](http://www.laywelin.com/Meta-Package-Initial-design-draft-1ee058cee40180e880dbea7dcb5a2186)
 

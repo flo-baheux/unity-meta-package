@@ -49,7 +49,7 @@ namespace MetaPackage
 
     private bool HasMissingRarityKind(out string errorMessage)
     {
-      errorMessage = $"Requires one levels settings entry per rarity.";
+      errorMessage = $"Requires one Rarity Levels Settings entry per rarity.";
       HashSet<RarityKind> completeRaritySet = Enum.GetValues(typeof(RarityKind)).Cast<RarityKind>().ToHashSet();
       HashSet<RarityKind> rarityKindsInList = new();
       rarityLevelsSettings.ForEach(x => rarityKindsInList.Add(x.rarityKind));
@@ -63,15 +63,15 @@ namespace MetaPackage
 
     private bool HasMissingLevelSettings(out string errorMessage)
     {
-      errorMessage = $"Requires at least one level for each rarity.";
+      errorMessage = $"Requires least one \"Level 1\" for each rarity.";
       HashSet<RarityKind> ListNoLevelRarity = new();
 
       foreach (var raritySettings in rarityLevelsSettings)
-        if (raritySettings.levelsSettings.Count == 0)
+        if (raritySettings.levelsSettings.Count < 2) // Level 0 + Level 1 = 2 entries
           ListNoLevelRarity.Add(raritySettings.rarityKind);
 
       if (ListNoLevelRarity.Count > 0)
-        errorMessage += $"\nRarity with no levels configured: {string.Join(',', ListNoLevelRarity)}";
+        errorMessage += $"\nRarity with no \"Level 1\" configured: {string.Join(',', ListNoLevelRarity)}";
 
       return ListNoLevelRarity.Count > 0;
     }
@@ -92,7 +92,7 @@ namespace MetaPackage
       name = rarityKind.ToString();
       for (int i = 0; i < levelsSettings.Count; i++)
       {
-        levelsSettings[i].SetName($"Level {i + 1}");
+        levelsSettings[i].SetName($"Level {i}{(i == 0 ? $" - Please leave this one empty" : "")}");
         levelsSettings[i].CustomValidation();
       }
     }
