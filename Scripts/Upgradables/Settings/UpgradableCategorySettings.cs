@@ -22,9 +22,6 @@ namespace MetaPackage
 #if UNITY_EDITOR
     public override void CustomValidation()
     {
-      foreach (var rarityLevelSettings in rarityLevelsSettings)
-        rarityLevelSettings.CustomValidation();
-
       if (HasDuplicateRarityKind(out string duplicateRarityErrorMessage))
         errors.Add(duplicateRarityErrorMessage);
 
@@ -33,7 +30,12 @@ namespace MetaPackage
 
       if (HasMissingLevelSettings(out string missingLevelSettingsErrorMessage))
         errors.Add(missingLevelSettingsErrorMessage);
+    }
 
+    public override void Refresh()
+    {
+      foreach (var rarityLevelSettings in rarityLevelsSettings)
+        rarityLevelSettings.Refresh();
     }
 
     private bool HasDuplicateRarityKind(out string errorMessage)
@@ -87,13 +89,13 @@ namespace MetaPackage
     public List<T_LevelSettings> levelsSettings;
 
 #if UNITY_EDITOR
-    public void CustomValidation()
+    public void Refresh()
     {
       name = rarityKind.ToString();
       for (int i = 0; i < levelsSettings.Count; i++)
       {
         levelsSettings[i].SetName($"Level {i}{(i == 0 ? $" - Please leave this one empty" : "")}");
-        levelsSettings[i].CustomValidation();
+        levelsSettings[i].Refresh();
       }
     }
   }

@@ -12,11 +12,7 @@ namespace MetaPackage
     public List<UpgradableUpgradeCost> costsToUpgrade;
 
 #if UNITY_EDITOR
-    public void CustomValidation()
-    {
-      costsToUpgrade.ForEach(x => x.CustomValidation());
-    }
-
+    public void Refresh() => costsToUpgrade.ForEach(x => x.Refresh());
     public void SetName(string name) => this.name = name;
 #endif
   }

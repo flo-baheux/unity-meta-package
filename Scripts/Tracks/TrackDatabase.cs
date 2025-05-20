@@ -15,6 +15,9 @@ namespace MetaPackage
         errors.Add(duplicateErrorMessage);
     }
 
+    public override void Refresh()
+    { }
+
     private bool HasDuplicateTrackKind(out string duplicateErrorMessage)
     {
       bool duplicateFound = false;

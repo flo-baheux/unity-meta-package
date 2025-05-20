@@ -11,10 +11,6 @@ namespace MetaPackage
     public CurrencyKind currencyKind;
     public int quantity;
 
-    public void CustomValidation()
-    {
-      var currency = MetaManager.Instance.GetCurrency(currencyKind);
-      name = $"{currency.GetDisplayNamePlural()} - {quantity}";
-    }
+    public void Refresh() => name = $"{currencyKind} - {quantity}";
   }
 }

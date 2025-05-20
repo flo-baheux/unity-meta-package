@@ -6,6 +6,9 @@ namespace MetaPackage
 {
   public interface IBaseUpgradable
   {
+    public UpgradableKind UpgradableKind { get; }
+    public Enum EntityKindAsEnum { get; }
+
     public Action OnUnlock { get; set; }
     public Action OnLevelChanged { get; set; }
     public Action OnExperienceIncreased { get; set; }
@@ -53,6 +56,11 @@ namespace MetaPackage
     where T_LevelSettings : UpgradableLevelSettings
   {
     public T_UpgradableSettings Settings { get; private set; }
+
+    public UpgradableKind UpgradableKind { get => Settings.UpgradableKind; }
+    public Enum EntityKindAsEnum { get => Settings.EntityKindAsEnum; }
+    public T_EntityKind EntityKind { get => Settings.entityKind; }
+
     public UpgradableRewardData RewardData { get => Settings.RewardData; }
 
     public Upgradable(T_UpgradableSettings settings)

@@ -16,6 +16,9 @@ namespace MetaPackage
         errors.Add(duplicateErrorMessage);
     }
 
+    public override void Refresh()
+    { }
+
     private bool HasDuplicateUpgradeChestKind(out string duplicateErrorMessage)
     {
       bool duplicateFound = false;

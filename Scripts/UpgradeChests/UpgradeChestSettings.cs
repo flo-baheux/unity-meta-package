@@ -27,6 +27,9 @@ namespace MetaPackage
         errors.Add(nonCompatibleUpgradableKindErrorMessage);
     }
 
+    public override void Refresh()
+    { }
+
     private bool HasNonCompatibleCustomUpgradableKind(out string errorMessage)
     {
       errorMessage = $"Custom upgrades are not compatible (not of upgradable kind {upgradableKind}).";

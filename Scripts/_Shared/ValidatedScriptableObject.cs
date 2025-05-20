@@ -16,9 +16,11 @@ namespace MetaPackage
       warnings.Clear();
       errors.Clear();
       CustomValidation();
+      Refresh();
     }
 
     public abstract void CustomValidation();
+    public abstract void Refresh();
 #endif
   }
 }

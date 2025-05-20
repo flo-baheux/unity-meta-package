@@ -16,6 +16,9 @@ namespace MetaPackage
         errors.Add(duplicateErrorMessage);
     }
 
+    public override void Refresh()
+    { }
+
     private bool HasDuplicateRarityKind(out string duplicateErrorMessage)
     {
       bool duplicateFound = false;
