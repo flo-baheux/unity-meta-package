@@ -237,7 +237,7 @@ namespace MetaPackageDebug
       public UpgradableKind upgradableKind;
       public Enum entityKind;
       public IBaseUpgradable upgradable;
-      public InternalUpgradableSettings settings;
+      public BaseUpgradableSettings settings;
       public Func<int> GetPreviousLevelXpToNextLevel;
       public Func<int> GetCurrentLevelXpToNextLevel;
       public Func<List<UpgradableUpgradeCost>> GetUpgradableCosts;
@@ -249,7 +249,7 @@ namespace MetaPackageDebug
         upgradable = MetaManager.Instance.GetUpgradable(upgradableKind, entityKind);
         if (upgradable == null)
           return;
-        settings = GetProp<InternalUpgradableSettings>(upgradable, "Settings");
+        settings = GetProp<BaseUpgradableSettings>(upgradable, "Settings");
         GetPreviousLevelXpToNextLevel = () =>
         {
           var previousLevelSettings = GetProp<UpgradableLevelSettings>(upgradable, "PreviousLevelSettings");

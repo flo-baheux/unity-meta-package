@@ -179,7 +179,7 @@ For simplicity's sake, let's say you want to create an `UpgradableWeapon` weapon
 To define a new upgradable kind and be able to define a list of upgradables, you need to:
 
 1. Edit `UpgradableKind` enum in `MetaPackage/Databases/UpgradableKind.cs`
-2. Copyfrom `MetaPackage/Examples/Scripts/Upgradables/ExampleSkills`
+2. Copy from `MetaPackage/Examples/Scripts/Upgradables/ExampleSkills`
 3. Replace all `ExampleUpgradableSkill`
 
 example for ExampleUpgradableSkill:
@@ -217,3 +217,38 @@ The upgradable is now available from anywhere in the project.
 ```
 
 All default capabilities [can be found here](./Scripts/Upgradables/Upgradable.cs)
+
+# Extending the package
+
+The package is made to be easy to edit and add project specific features. 
+Here is a non-exhaustive section to help you with it.
+
+## Adding a new reward kind
+
+Reminder: A reward is something that can be granted once reashing a threshold in a track.
+It's also possible to design game systems that grants rewards manually.
+
+1. Edit `RewardKind` enum in `MetaPackage/Scripts/Rewards/RewardKind.cs`
+2. Make sure the settings you want are available within `MetaPackage/Scripts/Rewards/RewardSettings.cs`
+3. Create a new reward extending `BaseReward` 
+
+Example:
+```csharp
+  public class UpgradableExperienceReward : BaseReward
+  {
+    public UpgradableExperienceReward(RewardSettings settings) : base(settings)
+    { }
+
+    public override void Claim()
+    {
+      var upgradable = MetaManager.Instance.GetUpgradable(settings.upgradable.UpgradableKind, settings.upgradable.EntityKindAsEnum);
+      upgradable.IncreaseExperience(settings.quantity);
+    }
+
+    public override Sprite GetSprite() => settings.upgradable.icon;
+
+    public override string GetText() => $"{settings.quantity}xp for {settings.upgradable.displayName}";
+  }
+```
+
+4. Add a new case in `RewardFactory` in `MetaPackage/Scripts/Rewards/RewardFactory.cs`

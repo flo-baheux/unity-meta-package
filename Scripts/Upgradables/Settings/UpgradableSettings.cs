@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MetaPackage
 {
-  public abstract class InternalUpgradableSettings : ScriptableObject
+  public abstract class BaseUpgradableSettings : ScriptableObject
   {
     public abstract UpgradableKind UpgradableKind { get; }
     public abstract Enum EntityKindAsEnum { get; }
@@ -20,7 +20,7 @@ namespace MetaPackage
     public abstract IBaseUpgradable InstantiateUpgradable();
   }
 
-  public abstract class UpgradableSettings<T_EntityKind, T_LevelSettings> : InternalUpgradableSettings
+  public abstract class UpgradableSettings<T_EntityKind, T_LevelSettings> : BaseUpgradableSettings
     where T_EntityKind : Enum
     where T_LevelSettings : UpgradableLevelSettings
   {

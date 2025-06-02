@@ -16,6 +16,8 @@ namespace MetaPackage
           return new UpgradeChestReward(settings);
         case RewardKind.UpgradableUnlock:
           return new UpgradableUnlockReward(settings);
+        case RewardKind.UpgradableExperience:
+          return new UpgradableExperienceReward(settings);
         case RewardKind.Currency:
           return new CurrencyReward(settings);
         case RewardKind.CurrencyUnlock:

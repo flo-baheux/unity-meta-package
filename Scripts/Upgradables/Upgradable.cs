@@ -8,11 +8,15 @@ namespace MetaPackage
   {
     public UpgradableKind UpgradableKind { get; }
     public Enum EntityKindAsEnum { get; }
+    public BaseUpgradableSettings BaseSettings { get; }
 
     public Action OnUnlock { get; set; }
     public Action OnLevelChanged { get; set; }
     public Action OnExperienceIncreased { get; set; }
     public Action OnUpgradeAvailable { get; set; }
+
+    public string DisplayName { get; }
+    public RarityKind RarityKind { get; }
 
     public int Experience { get; }
     public int Level { get; }
@@ -21,12 +25,16 @@ namespace MetaPackage
     public void IncreaseExperience(int increaseBy);
     public void ForceSetLevel(int level);
 
+    public bool CanUpgrade();
+    public bool TryUpgrade();
+
     public bool IsUnlocked { get; }
     public bool IsEligibleForRewards { get; }
     public UpgradableRewardData RewardData { get; }
     public void Unlock();
 
     public int ExperienceRelativeToLevel { get; }
+    public int ExperienceToNextLevel { get; }
     public bool IsCurrentLevelFirst { get; }
     public bool IsCurrentLevelLast { get; }
 
@@ -56,6 +64,7 @@ namespace MetaPackage
     where T_LevelSettings : UpgradableLevelSettings
   {
     public T_UpgradableSettings Settings { get; private set; }
+    public BaseUpgradableSettings BaseSettings { get => Settings; }
 
     public UpgradableKind UpgradableKind { get => Settings.UpgradableKind; }
     public Enum EntityKindAsEnum { get => Settings.EntityKindAsEnum; }
@@ -77,6 +86,9 @@ namespace MetaPackage
     public Action OnExperienceIncreased { get; set; }
     public Action OnUpgradeAvailable { get; set; }
 
+    public string DisplayName { get => Settings.displayName; }
+    public RarityKind RarityKind { get => Settings.rarityKind; }
+
     private int _experience = 0;
     public int Experience
     {
@@ -93,6 +105,7 @@ namespace MetaPackage
 
     public int MaxLevel => Settings.LevelsSettings.Count() - 1;
     public int ExperienceRelativeToLevel => Experience - Settings.LevelsSettings.Take(Level).Sum(x => x.experienceToNextLevel);
+    public int ExperienceToNextLevel => CurrentLevelSettings.experienceToNextLevel;
 
     public T_LevelSettings PreviousLevelSettings => IsCurrentLevelFirst ? null : Settings.LevelsSettings.ElementAt(Level - 1);
     public T_LevelSettings CurrentLevelSettings => Settings.LevelsSettings.ElementAt(Level);

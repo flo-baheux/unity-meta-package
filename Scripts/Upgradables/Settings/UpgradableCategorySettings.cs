@@ -8,7 +8,7 @@ namespace MetaPackage
   public abstract class BaseUpgradableCategorySettings : ValidatedScriptableObject
   {
     public abstract UpgradableKind upgradableKind { get; }
-    public abstract List<InternalUpgradableSettings> InternalUpgradableSettings { get; }
+    public abstract List<BaseUpgradableSettings> InternalUpgradableSettings { get; }
   }
 
   public abstract class UpgradableCategorySettings<T_EntityKind, T_LevelSettings> : BaseUpgradableCategorySettings
@@ -17,7 +17,7 @@ namespace MetaPackage
   {
     public List<UpgradableRarityLevelsSettings<T_LevelSettings>> rarityLevelsSettings;
     public List<UpgradableSettings<T_EntityKind, T_LevelSettings>> upgradableSettings;
-    public override List<InternalUpgradableSettings> InternalUpgradableSettings { get => upgradableSettings.Cast<InternalUpgradableSettings>().ToList(); }
+    public override List<BaseUpgradableSettings> InternalUpgradableSettings { get => upgradableSettings.Cast<BaseUpgradableSettings>().ToList(); }
 
 #if UNITY_EDITOR
     public override void CustomValidation()

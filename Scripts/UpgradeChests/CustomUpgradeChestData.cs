@@ -5,7 +5,7 @@ namespace MetaPackage
   [Serializable]
   public class CustomUpgradeChestData
   {
-    public InternalUpgradableSettings upgradable;
+    public BaseUpgradableSettings upgradable;
     public int quantity;
   }
 }

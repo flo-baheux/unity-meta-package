@@ -6,6 +6,7 @@
     TrackRewardPoints,
     UpgradeChest,
     UpgradableUnlock,
+    UpgradableExperience,
     Currency,
     CurrencyUnlock
   }
