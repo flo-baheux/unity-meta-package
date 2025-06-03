@@ -228,19 +228,4 @@ namespace MetaPackage
     }
 #endif
   }
-
-#if UNITY_EDITOR
-  [InitializeOnLoad]
-  public static class ManagerEditorReset
-  {
-    static ManagerEditorReset()
-    {
-      EditorApplication.delayCall += () =>
-      {
-        MetaManager.Instance.Reset();
-        MetaManager.ClearStaticReferences();
-      };
-    }
-  }
-#endif
 }
