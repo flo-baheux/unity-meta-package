@@ -34,7 +34,7 @@ namespace MetaPackage
       {
         BaseUpgradableCategorySettings instantiatedCategorySettings = ScriptableObject.Instantiate(categorySettings);
         upgradableCategoryDict[categorySettings.upgradableKind] = instantiatedCategorySettings;
-        foreach (var upgradableSettings in categorySettings.InternalUpgradableSettings)
+        foreach (var upgradableSettings in categorySettings.BaseUpgradableSettings)
         {
           var upgradable = ScriptableObject.Instantiate(upgradableSettings).InstantiateUpgradable();
           upgradableDict[((int)upgradableSettings.UpgradableKind, Convert.ToInt32(upgradableSettings.EntityKindAsEnum))] = upgradable;
