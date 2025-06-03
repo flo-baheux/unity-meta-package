@@ -15,7 +15,7 @@ namespace MetaPackage
     [ShowIf("rewardKind", RewardKind.UpgradeChest)]
     public UpgradeChestKind upgradeChestKind;
 
-    [ShowIf("rewardKind", new object[] { RewardKind.UpgradableUnlock, RewardKind.TrackRewardPoints })]
+    [ShowIf("rewardKind", new object[] { RewardKind.UpgradableUnlock, RewardKind.UpgradableExperience })]
     public BaseUpgradableSettings upgradable;
 
     [ShowIf("rewardKind", RewardKind.Currency)]

@@ -20,9 +20,9 @@ MonoBehaviour:
     pointsRequired: 20
     rewards:
     - quantity: 10
-      rewardKind: 4
+      rewardKind: 5
       track: 0
-      chestKind: 0
+      upgradeChestKind: 0
       upgradable: {fileID: 0}
       currencyKind: 0
   - name: 40
@@ -30,9 +30,9 @@ MonoBehaviour:
     pointsRequired: 40
     rewards:
     - quantity: 10
-      rewardKind: 4
+      rewardKind: 5
       track: 0
-      chestKind: 0
+      upgradeChestKind: 0
       upgradable: {fileID: 0}
       currencyKind: 0
   - name: 60
@@ -40,9 +40,9 @@ MonoBehaviour:
     pointsRequired: 60
     rewards:
     - quantity: 10
-      rewardKind: 4
+      rewardKind: 5
       track: 0
-      chestKind: 0
+      upgradeChestKind: 0
       upgradable: {fileID: 0}
       currencyKind: 0
   triggers: []
