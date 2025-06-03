@@ -98,6 +98,6 @@ namespace MetaPackage
         levelsSettings[i].Refresh();
       }
     }
-  }
 #endif
+  }
 }
