@@ -1,11 +1,9 @@
-using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 
 namespace MetaPackage
 {
   [CustomEditor(typeof(UpgradeChestSettings), true)]
-  public class UpgradeChestSettingsEditor : Editor
+  public class UpgradeChestSettingsEditor : UnityEditor.Editor
   {
     public override void OnInspectorGUI()
     {

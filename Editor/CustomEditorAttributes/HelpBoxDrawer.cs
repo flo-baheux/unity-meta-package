@@ -5,7 +5,7 @@ using UnityEditor;
 
 namespace MetaPackage
 {
-
+#if !ODIN_INSPECTOR
   [CustomPropertyDrawer(typeof(HelpBoxAttribute))]
   public class HelpBoxDrawer : DecoratorDrawer
   {
@@ -41,4 +41,5 @@ namespace MetaPackage
       }
     }
   }
+#endif
 }

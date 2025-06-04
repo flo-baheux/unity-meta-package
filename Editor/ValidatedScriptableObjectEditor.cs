@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MetaPackage
 {
   [CustomEditor(typeof(ValidatedScriptableObject), true)]
-  public class ValidatedScriptableObjectEditor : Editor
+  public class ValidatedScriptableObjectEditor : UnityEditor.Editor
   {
     public override void OnInspectorGUI()
     {

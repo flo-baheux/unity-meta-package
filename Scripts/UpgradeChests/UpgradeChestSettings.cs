@@ -21,6 +21,7 @@ namespace MetaPackage
 
     public List<CustomUpgradeChestData> customUpgradeChestDatas;
 
+#if UNITY_EDITOR
     public override void CustomValidation()
     {
       if (HasNonCompatibleCustomUpgradableKind(out string nonCompatibleUpgradableKindErrorMessage))
@@ -29,6 +30,7 @@ namespace MetaPackage
 
     public override void Refresh()
     { }
+#endif
 
     private bool HasNonCompatibleCustomUpgradableKind(out string errorMessage)
     {
