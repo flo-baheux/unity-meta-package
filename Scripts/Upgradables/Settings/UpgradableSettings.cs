@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 namespace MetaPackage
 {
@@ -9,13 +10,15 @@ namespace MetaPackage
     public abstract UpgradableKind UpgradableKind { get; }
     public abstract Enum EntityKindAsEnum { get; }
     public abstract UpgradableRewardData RewardData { get; }
-    public string displayName;
-    public Sprite icon;
     public RarityKind rarityKind;
+    public string displayName;
+    public string descriptionTitle;
+    public string description;
+    public Sprite icon;
+    public VideoClip videoClip;
 
     public bool unlockedByDefault = false;
     public bool eligibleForRewards = true;
-
 
     public abstract IBaseUpgradable InstantiateUpgradable();
   }

@@ -27,6 +27,7 @@ namespace MetaPackage
 
     public bool CanUpgrade();
     public bool TryUpgrade();
+    public List<UpgradableUpgradeCost> CurrentCostsToUpgrade { get; }
 
     public bool IsUnlocked { get; }
     public bool IsEligibleForRewards { get; }
@@ -136,6 +137,8 @@ namespace MetaPackage
         OnUpgradeAvailable?.Invoke();
     }
 
+    public List<UpgradableUpgradeCost> CurrentCostsToUpgrade { get => CurrentLevelSettings.costsToUpgrade; }
+
     public bool TryUpgrade()
     {
       if (!CanUpgrade())
@@ -177,7 +180,7 @@ namespace MetaPackage
       if (IsCurrentLevelLast || ExperienceRelativeToLevel < CurrentLevelSettings.experienceToNextLevel)
         return false;
 
-      if (CurrentLevelSettings.costsToUpgrade.Any(cost => cost.quantity > MetaManager.Instance.GetCurrency(cost.currencyKind).Quantity))
+      if (CurrentCostsToUpgrade.Any(cost => cost.quantity > MetaManager.Instance.GetCurrency(cost.currencyKind).Quantity))
         return false;
 
       return true;
@@ -188,8 +191,7 @@ namespace MetaPackage
       if (!CanUpgrade())
         return false;
 
-      var costsToUpgrade = CurrentLevelSettings.costsToUpgrade;
-      foreach (var cost in costsToUpgrade)
+      foreach (var cost in CurrentCostsToUpgrade)
         MetaManager.Instance.GetCurrency(cost.currencyKind).AdjustQuantity(-cost.quantity);
 
       return true;
